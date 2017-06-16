@@ -1,0 +1,43 @@
+body {
+    background: #00008B;
+    cursor: default;
+    margin: 0;
+    color: #FFF;
+}
+
+input {
+    margin: 10px;
+    padding: 0 5px 0 5px;
+    text-align: center;
+    border: solid 1px #404041
+}
+
+#logo-large {
+    height: 325px;
+    display: block;
+    margin: auto;
+    text-align: center;
+    padding: 35px 0 15px 0;
+}
+
+
+.registration-wrapper {
+    display: block;
+}
+
+#registration-form, .redirect-to, #login-form, .welcome-text, .error-message {
+    text-align: center;
+}
+
+.welcome-text {
+    max-width: 650px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.error-message {
+    font-style: italic;
+    color: #F00;
+    margin-bottom: 10px;
+    text-align: center;
+}

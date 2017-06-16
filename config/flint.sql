@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS donors;
 DROP TABLE IF EXISTS recipients;
+DROP TABLE IF EXISTS donations;
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
@@ -12,20 +13,34 @@ CREATE TABLE users (
 );
 
 CREATE TABLE donors (
-    id SERIAL PRIMARY KEY
+    id SERIAL PRIMARY KEY,
     user_id INTEGER NOT NULL REFERENCES users(id),
+    image_url TEXT,
+    bio TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP
 );
 
 CREATE TABLE recipients (
-    id SERIAL PRIMARY KEY
+    id SERIAL PRIMARY KEY,
     user_id INTEGER NOT NULL REFERENCES users(id),
     family_name VARCHAR(250) NOT NULL,
     family_members INTEGER NOT NULL,
     address VARCHAR(250) NOT NULL,
     image_url TEXT,
     story TEXT,
+    additional_notes TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP
+);
+
+CREATE TABLE donations (
+    id SERIAL PRIMARY KEY,
+    donor_id INTEGER NOT NULL,
+    recipient_id INTEGER NOT NULL,
+    donation_amount INTEGER NOT NULL,
+    donation_frequency VARCHAR(250) NOT NULL,
+    donor_message TEXT,
+    additional_notes TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

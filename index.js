@@ -24,6 +24,10 @@ if (process.env.NODE_ENV != 'production') {
     app.use(require('./build'));
 }
 
+// ROUTERS
+// app.use(require('./routes/appRoutes'));
+app.use(require('./routes/authRoutes'));
+
 // CATCHALL ROUTE
 app.get('*', function(req, res) {
     if (!req.session.user && req.url != '/welcome') {
