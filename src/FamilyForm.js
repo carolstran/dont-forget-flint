@@ -39,22 +39,22 @@ export class FamilyForm extends React.Component {
                 <h2>Please fill out this additional information.</h2><br />
                 <p>Something about consenting to give your address to an outside water company.</p><br />
                 <div id="family-form">
-                    <label for="familyName" class="input-labels">Family Name:<br />
+                    <label for="familyName" class="input-labels">Family Name<em>*</em><br />
                         <input type="text" name="familyName" maxlength="250" onChange={this.handleUserInfo} required /><br />
                     </label><br />
-                    <label for="familyMembers" class="input-labels">Number of Family Members:<br />
+                    <label for="familyMembers" class="input-labels">Number of Family Members<em>*</em><br />
                         <input type="number" id="family-members-input" name="familyMembers" onChange={this.handleUserInfo} required /><br />
                     </label><br />
-                    <label for="address" class="input-labels">Address:<br />
+                    <label for="address" class="input-labels">Address<em>*</em><br />
                         <input type="text" name="address" maxlength="250" onChange={this.handleUserInfo} required /><br />
                     </label><br />
-                    <label for="city" class="input-labels">City:<br />
+                    <label for="city" class="input-labels">City<em>*</em><br />
                         <input type="text" value="Flint" name="city" maxlength="50" onChange={this.handleUserInfo} required /><br />
                     </label><br />
-                    <label for="state" class="input-labels">State:<br />
+                    <label for="state" class="input-labels">State<em>*</em><br />
                         <input type="text" id="state-input" value="MI" name="state" maxlength="50" onChange={this.handleUserInfo} required /><br />
                     </label><br />
-                    <label for="zipCode" class="input-labels">Zip Code:<br />
+                    <label for="zipCode" class="input-labels">Zip Code<em>*</em><br />
                         <input type="number" id="zip-code-input" name="zipCode" onChange={this.handleUserInfo} required /><br />
                     </label><br />
                     <button type="button" className="button" onClick={this.submitUserInfo}>CONTINUE</button>

@@ -16,6 +16,10 @@ p {
     font-family: 'Droid Sans', sans-serif;
 }
 
+em {
+    color: #8B0000;
+}
+
 a {
     color: #EBC789;
     text-decoration: none;
@@ -48,8 +52,8 @@ a:hover {
 /* INPUTS, TEXT AREAS AND SELECTORS */
 
 input {
-    margin: 10px;
-    padding: 0 5px 0 5px;
+    margin: 0 10px;
+    padding: 2px 5px 2px 5px;
     text-align: center;
     background: none;
     border: solid 1px #EBC789;
@@ -68,6 +72,10 @@ label {
     position: relative;
     text-align: center;
     font-size: 12px;
+}
+
+select {
+    margin-bottom: 15px;
 }
 
 .styled-select {
@@ -129,6 +137,7 @@ select:focus {
     text-align: center;
     margin-top: 200px;
     display: block;
+    text-transform: uppercase;
 }
 
 #nav-links a {

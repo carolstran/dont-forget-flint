@@ -34,8 +34,12 @@ export class Login extends React.Component {
                 {this.state.error && <div className="error-message">{'Something went wrong! Please try again.'}</div>}
                 <h2 className="welcome-text">Please log in.</h2><br />
                 <div id="login-form">
-                    <input type="text" className="input-field" name="email" onChange={this.handleUserInfo} placeholder="Email" required /><br />
-                    <input type="password" className="input-field" name="password" onChange={this.handleUserInfo} placeholder="Password" required /><br />
+                    <label for="email" class="input-labels">Email<br />
+                        <input type="text" name="email" onChange={this.handleUserInfo} required /><br />
+                    </label><br />
+                    <label for="password" class="input-labels">Password<br />
+                        <input type="password" name="password" onChange={this.handleUserInfo} required /><br />
+                    </label><br />
                     <button type="button" className="button" onClick={this.loginUser}>LOGIN</button><br />
                 </div><br />
                 <p className="redirect-to">{'Not a member? Register '}<Link to="/">{'here'}</Link>.</p>
