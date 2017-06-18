@@ -25,7 +25,7 @@ if (process.env.NODE_ENV != 'production') {
 }
 
 // ROUTERS
-// app.use(require('./routes/appRoutes'));
+app.use(require('./routes/appRoutes'));
 app.use(require('./routes/authRoutes'));
 
 // CATCHALL ROUTE

@@ -11,7 +11,7 @@ export class Home extends React.Component {
     render() {
         return (
             <div id="main-page">
-                <h1>TESTING</h1>
+                <h1>Hi {this.props.firstName}!</h1>
             </div>
         )
     }

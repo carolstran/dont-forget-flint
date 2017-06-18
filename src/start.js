@@ -17,8 +17,8 @@ let elem;
 const loggedOutRouter = (
     <Router history={hashHistory}>
         <Route path="/" component={Welcome}>
-            <Route path="/login" component={Login} />
-            <Route path="/familyform" component={FamilyForm} />
+            <Route path="/login/" component={Login} />
+            <Route path="/form/" component={FamilyForm} />
             <IndexRoute component={Register} />
         </Route>
     </Router>
@@ -27,7 +27,7 @@ const loggedOutRouter = (
 const loggedInRouter = (
     <Router history={browserHistory}>
         <Route path="/" component={App}>
-            <Route path="/profile" component={Profile} />
+            <Route path="/profile/" component={Profile} />
             <IndexRoute component={Home} />
         </Route>
     </Router>
