@@ -1,16 +1,92 @@
+/* GENERAL */
+
 body {
-    background: #00008B;
+    background: #1D1D1D;
     cursor: default;
     margin: 0;
-    color: #FFF;
+    color: #FFF9F9;
 }
+
+h1, h2, h3 {
+    font-family: 'Shadows Into Light', sans-serif;
+}
+
+p {
+    font-size: 14px;
+    font-family: 'Droid Sans', sans-serif;
+}
+
+a {
+    color: #EBC789;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #C1F1FF;
+    text-decoration: underline;
+}
+
+.button {
+    font-family: 'Shadows Into Light', sans-serif;
+    text-transform: uppercase;
+    color: #1D1D1D;
+    border: 0.5px solid #FFF9F9;
+    background-color: #FFF9F9;
+    padding: 5px 10px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.error-message {
+    font-family: 'Droid Sans', sans-serif;
+    font-style: italic;
+    color: #F00;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* INPUTS, TEXT AREAS AND SELECTORS */
 
 input {
     margin: 10px;
     padding: 0 5px 0 5px;
     text-align: center;
-    border: solid 1px #404041
+    background: none;
+    border: solid 1px #EBC789;
+    color: #FFF9F9;
 }
+
+textarea:focus, input:focus {
+    color: #FFF9F9;
+    border: solid 1px #C1F1FF;
+    outline: none !important;
+}
+
+label {
+    font-family: 'Droid Sans', sans-serif;
+    color: #FFF9F9;
+    position: relative;
+    text-align: center;
+    font-size: 12px;
+}
+
+.styled-select {
+    font-family: 'Droid Sans', sans-serif;
+    font-weight: bold;
+    height: 20px;
+    overflow: hidden;
+    width: 140px;
+    background-color: #EBC789;
+    border: solid 1px #9D6C27;
+    color: #9D6C27;
+}
+
+select:focus {
+    background-color: #C1F1FF;
+    outline: none !important;
+}
+
+/* WELCOME, REGISTER AND LOGIN */
 
 #logo-large {
     height: 325px;
@@ -19,7 +95,6 @@ input {
     text-align: center;
     padding: 35px 0 15px 0;
 }
-
 
 .registration-wrapper {
     display: block;
@@ -35,9 +110,39 @@ input {
     margin: 0 auto;
 }
 
-.error-message {
-    font-style: italic;
-    color: #F00;
-    margin-bottom: 10px;
+/* IN-APP NAV BAR */
+
+#nav-bar {
+    float: left;
+    display: inline-block;
+}
+
+#logo-small {
+    float: left;
+    height: 150px;
+    margin-top: 20px;
+}
+
+#nav-links {
+    font-family: 'Shadows Into Light', sans-serif;
+    font-size: 25px;
     text-align: center;
+    margin-top: 200px;
+    display: block;
+}
+
+#nav-links a {
+    margin: 10px 0 10px 0;
+}
+
+hr {
+    display: inline-block;
+    background: #FFF9F9;
+    height: 100vh;
+    position: fixed;
+}
+
+.children {
+    display: inline-block;
+    margin-left: 50px;
 }

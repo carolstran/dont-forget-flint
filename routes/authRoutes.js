@@ -13,24 +13,51 @@ router.route('/register')
         let password = req.body.password;
         let userType = req.body.userType;
 
-        auth.hashPassword(password).then(function(hash) {
-            db.registerUser(firstName, lastName, email, hash, userType)
-            .then(function(result) {
-                req.session.user = {
-                    id: result.id,
-                    firstName: firstName,
-                    lastName: lastName,
-                    email: email,
-                    userType: userType
-                };
-                res.json({
-                    success: true
+        console.log(userType);
+
+        // if (userType != 'donor' || 'recipient') {
+        //     throw new Error('User must be either a donor or a recipient');
+        // } else {
+            auth.hashPassword(password).then(function(hash) {
+                db.registerUser(firstName, lastName, email, hash, userType)
+                .then(function(result) {
+                    req.session.user = {
+                        id: result.id,
+                        firstName: firstName,
+                        lastName: lastName,
+                        email: email,
+                        userType: userType
+                    };
+                    res.json({
+                        success: true
+                    });
+                }).catch(function(err) {
+                    console.log('Error registering user', err);
                 });
             }).catch(function(err) {
-                console.log('Error registering user', err);
+                console.log('Error hashing password', err);
+            });
+        // }
+    });
+
+router.route('/submitRecipientInfo')
+
+    .post(function(req, res) {
+        let familyName = req.body.familyName;
+        let familyMembers = req.body.familyMembers;
+        let address = req.body.address;
+        let city = req.body.city;
+        let state = req.body.state;
+        let zipCode = req.body.zipCode;
+
+        db.insertRecipientInfo(familyName, familyMembers, address, city, state, zipCode, req.session.user.id)
+        .then(function(result) {
+            console.log('Result from insertRecipientInfo DB query', result);
+            res.json({
+                success: true
             });
         }).catch(function(err) {
-            console.log('Error hashing password', err);
+            console.log('Error submitting recipient info', err);
         });
     });
 

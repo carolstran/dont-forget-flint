@@ -4,10 +4,7 @@ import {Link} from 'react-router';
 export default function Logo() {
     return (
         <Link to="/">
-            <h2>SMALL LOGO HERE</h2>
+            <img id="logo-small" src="./public/assets/flintlogo.png" />
         </Link>
     )
 }
-
-
-// <img id="logo-small" src="/public/assets/" />

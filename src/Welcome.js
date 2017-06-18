@@ -3,10 +3,8 @@ import React from 'react';
 export function Welcome(props) {
     return (
         <div id="welcome-wrapper">
-            <h1 id="logo-large">LARGE LOGO HERE</h1>
+            <img id="logo-large" src="./public/assets/flintlogo.png" />
             {props.children}
         </div>
     );
 }
-
-// <img id="logo-large" src="./public/assets/" />

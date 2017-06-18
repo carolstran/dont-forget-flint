@@ -3,15 +3,15 @@ import {Router, Route, Link, IndexRoute, hashHistory} from 'react-router';
 import axios from './axios';
 import {App} from './App';
 
-export class Home extends React.Component {
+export class Profile extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
     }
     render() {
         return (
-            <div id="main-page">
-                <h1>TESTING</h1>
+            <div id="profile-page">
+                <h1>MORE TESTING</h1>
             </div>
         )
     }

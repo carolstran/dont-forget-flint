@@ -25,6 +25,28 @@ function registerUser(first, last, email, hash, userType) {
     });
 }
 
+function insertRecipientInfo(familyName, familyMembers, address, city, state, zipCode, userId) {
+    let q = `INSERT INTO recipients (family_name, family_members, address, city, state, zip_code)
+             VALUES ($1, $2, $3, $4, $5, $6) WHERE (user_id = $7);`;
+    let params = [
+        familyName,
+        familyMembers,
+        address,
+        city,
+        state,
+        zipCode,
+        userId
+    ];
+
+    return db.query(q, params)
+    .then(function(results) {
+        return results;
+    }).catch(function(err) {
+        console.log('Error insertRecipientInfo in DB', err);
+        throw err;
+    });
+}
+
 function checkAccount(email, password) {
     let q = `SELECT * FROM users WHERE email = $1;`;
     // NEED TO FIX THIS TO INCLUDE OTHER PROPERTIES
@@ -68,4 +90,5 @@ function checkAccount(email, password) {
 
 // EXPORTS
 module.exports.registerUser = registerUser;
+module.exports.insertRecipientInfo = insertRecipientInfo;
 module.exports.checkAccount = checkAccount;
