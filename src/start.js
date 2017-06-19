@@ -6,11 +6,15 @@ import axios from './axios';
 import {Welcome} from './Welcome';
 import {Login} from './Login';
 import {Register} from './Register';
-import {FamilyForm} from './FamilyForm'
 
 import {App} from './App';
 import {Home} from './Home';
 import {Profile} from './Profile';
+
+import {Donate} from './Donate';
+
+import {FamilyForm} from './FamilyForm';
+import {Resources} from './Resources';
 
 let elem;
 
@@ -28,29 +32,17 @@ const loggedInRouter = (
         <Route path="/" component={App}>
             <Route path="/profile/" component={Profile} />
             <Route path="/form/" component={FamilyForm} />
+            <Route path="/donate/" component={Donate} />
+            <Route path="/resources/" component={Resources} />
             <IndexRoute component={Home} />
         </Route>
     </Router>
 )
-
-// const loggedInRouterFamilies = (
-//     <Router history={browserHistory}>
-//         <Route path="/" component={App}>
-//             <IndexRoute component={Home} />
-//         </Route>
-//     </Router>
-// )
 
 if (location.pathname == '/welcome') {
     elem = loggedOutRouter;
 } else {
     elem = loggedInRouter;
 }
-
-// else if (location.pathname == '/donor') {
-//     elem = loggedInRouterDonors;
-// } else if (location.pathname == '/family') {
-//     elem = loggedInRouterFamilies;
-// }
 
 ReactDOM.render(elem, document.getElementById('main'));

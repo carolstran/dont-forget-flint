@@ -1,5 +1,4 @@
 import React from 'react';
-import {Router, Route, Link, IndexRoute, hashHistory} from 'react-router';
 import axios from './axios';
 
 export class Profile extends React.Component {

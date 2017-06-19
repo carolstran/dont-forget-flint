@@ -32,12 +32,12 @@ export class App extends React.Component {
 
         if (this.state.userType == 'donor') {
             return (
-                <div id="main-page">
+                <div id="app-wrapper">
                     <div id="nav-bar">
                         <Logo />
                         <div id="nav-links">
                             <Link to="/">Home</Link><br />
-                            <Link to="">Donate</Link><br />
+                            <Link to="/donate/">Donate</Link><br />
                             <Link to="/profile/">Profile</Link><br />
                             <Link onClick={this.handleLogout}>Logout</Link><br />
                         </div>
@@ -50,12 +50,12 @@ export class App extends React.Component {
             )
         } else {
             return (
-                <div id="main-page">
+                <div id="app-wrapper">
                     <div id="nav-bar">
                         <Logo />
                         <div id="nav-links">
                             <Link to="/">Home</Link><br />
-                            <Link to="">Resources</Link><br />
+                            <Link to="/resources/">Resources</Link><br />
                             <Link to="/profile/">Profile</Link><br />
                             <Link onClick={this.handleLogout}>Logout</Link><br />
                         </div>
