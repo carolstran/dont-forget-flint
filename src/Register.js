@@ -64,8 +64,8 @@ export class Register extends React.Component {
         return (
             <div id="registration-wrapper">
                 {this.state.error && <div className="error-message">{'Something went wrong! Please try again.'}</div>}
-                <h2 className="welcome-text">Intro text of some kind.</h2><br />
-                <h2 className="welcome-text">Join us:</h2><br />
+                <h2 className="welcome-text">Connecting actual Flint families with potential donors.<br />
+                Join us:</h2><br />
                     <div id="registration-form">
                         <label for="firstName" class="input-labels">First Name<em>*</em><br />
                             <input type="text" name="firstName" maxlength="250" onChange={this.handleUserInfo} required /><br />

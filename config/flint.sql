@@ -36,7 +36,7 @@ CREATE TABLE recipients (
 CREATE TABLE donations (
     id SERIAL PRIMARY KEY,
     donor_id INTEGER NOT NULL REFERENCES users(id),
-    recipient_id INTEGER NOT NULL,
+    recipient_id INTEGER,
     donation_amount INTEGER NOT NULL,
     donation_frequency VARCHAR(250) NOT NULL,
     donor_message TEXT,
