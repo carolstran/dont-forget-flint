@@ -26,8 +26,8 @@ function registerUser(first, last, email, hash, userType) {
 }
 
 function insertRecipientInfo(familyName, familyMembers, address, city, state, zipCode, userId) {
-    let q = `INSERT INTO recipients (family_name, family_members, address, city, state, zip_code)
-             VALUES ($1, $2, $3, $4, $5, $6) WHERE (user_id = $7);`;
+    let q = `INSERT INTO recipients (family_name, family_members, address, city, state, zip_code, user_id)
+             VALUES ($1, $2, $3, $4, $5, $6, $7);`;
     let params = [
         familyName,
         familyMembers,
@@ -48,8 +48,8 @@ function insertRecipientInfo(familyName, familyMembers, address, city, state, zi
 }
 
 function checkAccount(email, password) {
-    let q = `SELECT * FROM users WHERE email = $1;`;
-    // NEED TO FIX THIS TO INCLUDE OTHER PROPERTIES
+    let q = `SELECT * FROM users, recipients, donors
+             WHERE email = $1 AND (users.id = recipients.user_id OR users.id = donors.user_id);`;
     let params = [
         email
     ];
@@ -69,11 +69,11 @@ function checkAccount(email, password) {
                     userEmail: result.rows[0].email,
                     userFirstName: result.rows[0].first_name,
                     userLastName: result.rows[0].last_name,
-                    userType: result.rows[0].user_type
-                    // imageUrl: result.rows[0].image_url,
-                    // bio: result.rows[0].bio,
-                    // familyName: result.rows[0].familyName,
-                    // familyMembers: result.rows[0].familyMembers
+                    userType: result.rows[0].user_type,
+                    imageUrl: result.rows[0].image_url,
+                    location: result.rows[0].bio,
+                    familyName: result.rows[0].familyName,
+                    story: result.rows[0].story
                 };
                 return newObj;
             }).catch(function(err) {

@@ -10,7 +10,7 @@ CREATE TABLE users (
     email VARCHAR(250) NOT NULL UNIQUE,
     password_hash TEXT NOT NULL,
     user_type VARCHAR(250) NOT NULL,
-    CHECK (user_type == 'donor' OR 'recipient')
+    CHECK (user_type = 'donor' OR user_type = 'recipient')
 );
 
 CREATE TABLE donors (

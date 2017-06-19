@@ -16,16 +16,43 @@ export class FamilyForm extends React.Component {
         this.handleUserInfo = this.handleUserInfo.bind(this);
         this.submitUserInfo = this.submitUserInfo.bind(this);
     }
-    submitUserInfo(e) {
-        axios.post('/submitRecipientInfo', {familyName: this.state.familyName, familyMembers: this.state.familyMembers, address: this.state.address, city: this.state.city, state: this.state.state, zipCode: this.state.zipCode})
-        .then((result) => {
-            location.replace('/');
-        }).catch((err) => {
-            console.log('Unable to submit user info', err);
-            this.setState({
-                error: true
-            });
+    componentWillUnmount() {
+        console.log('Hit');
+        axios.get('/userProfile').then((res) => {
+            res.data.hasFilledOutForm = false;
+            console.log(res.data.hasFilledOutForm);
+            if (res.data.hasFilledOutForm == false) {
+                location.replace('/form/')
+            }
         });
+        // in every route you could add a prop called 'onEnter' to check to see if they are valid to go to that route
+    }
+    submitUserInfo(e) {
+        let familyName = this.state.familyName;
+        let familyMembers = this.state.familyMembers;
+        let address = this.state.address;
+        let city = this.state.city;
+        let state = this.state.state;
+        let zipCode = this.state.zipCode;
+
+        console.log(familyName, familyMembers, address, city, state, zipCode);
+
+        if (!familyName || !familyMembers || !address || !city || !state || !zipCode) {
+            this.setState({
+                notComplete: true
+            });
+        } else {
+            axios.post('/submitRecipientInfo', {familyName: familyName, familyMembers: familyMembers, address: address, city: city, state: state, zipCode: zipCode})
+            .then((res) => {
+                res.data.hasFilledOutForm = true;
+                location.replace('/');
+            }).catch((err) => {
+                console.log('Unable to submit user info', err);
+                this.setState({
+                    error: true
+                });
+            });
+        }
     }
     handleUserInfo(e) {
         this.setState({
@@ -35,9 +62,10 @@ export class FamilyForm extends React.Component {
     render() {
         return (
             <div id="family-form-wrapper">
-                {this.state.error && <div className="error-message">{'Something went wrong! Please try again.'}</div>}
                 <h2>Please fill out this additional information.</h2><br />
                 <p>Something about consenting to give your address to an outside water company.</p><br />
+                {this.state.error && <div className="error-message">{'Something went wrong! Please try again.'}</div>}
+                {this.state.notComplete && <div className="error-message">{'You must fill out every field to continue.'}</div>}
                 <div id="family-form">
                     <label for="familyName" class="input-labels">Family Name<em>*</em><br />
                         <input type="text" name="familyName" maxlength="250" onChange={this.handleUserInfo} required /><br />

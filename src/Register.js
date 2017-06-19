@@ -37,6 +37,7 @@ export class Register extends React.Component {
     submitUserInfo(e) {
         axios.post('/register', {firstName: this.state.firstName, lastName: this.state.lastName, email: this.state.email, password: this.state.password, userType: this.state.userType})
         .then((res) => {
+            console.log(res.data.userType);
             if (res.data.userType == 'recipient') {
                 location.replace('/form/')
             } else {

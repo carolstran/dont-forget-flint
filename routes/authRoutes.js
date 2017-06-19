@@ -13,11 +13,10 @@ router.route('/register')
         let password = req.body.password;
         let userType = req.body.userType;
 
-        console.log(userType);
-
-        // if (userType != 'donor' || 'recipient') {
-        //     throw new Error('User must be either a donor or a recipient');
-        // } else {
+        if (userType != 'donor' && userType != 'recipient') {
+            console.log(userType);
+            throw new Error('User must be either a donor or a recipient');
+        } else {
             auth.hashPassword(password).then(function(hash) {
                 db.registerUser(firstName, lastName, email, hash, userType)
                 .then(function(result) {
@@ -29,7 +28,8 @@ router.route('/register')
                         userType: userType
                     };
                     res.json({
-                        success: true
+                        success: true,
+                        userType: userType
                     });
                 }).catch(function(err) {
                     console.log('Error registering user', err);
@@ -37,7 +37,7 @@ router.route('/register')
             }).catch(function(err) {
                 console.log('Error hashing password', err);
             });
-        // }
+        }
     });
 
 router.route('/submitRecipientInfo')
@@ -52,12 +52,18 @@ router.route('/submitRecipientInfo')
 
         db.insertRecipientInfo(familyName, familyMembers, address, city, state, zipCode, req.session.user.id)
         .then(function(result) {
+            req.session.user.hasFilledOutForm = true;
             console.log('Result from insertRecipientInfo DB query', result);
             res.json({
-                success: true
+                success: true,
+                hasFilledOutForm: true
             });
         }).catch(function(err) {
             console.log('Error submitting recipient info', err);
+            res.json({
+                success: false,
+                hasFilledOutForm: false
+            });
         });
     });
 
@@ -69,18 +75,22 @@ router.route('/login')
 
         db.checkAccount(email, password).then(function(userObj) {
             if (userObj.passwordMatch == true) {
-                // NEED TO FIX THIS TO INCLUDE OTHER PROPERTIES
                 req.session.user = {
                     id: userObj.userId,
                     firstName: userObj.userFirstName,
                     lastName: userObj.userLastName,
                     email: userObj.userEmail,
-                    userType: userObj.userType
-                    // imageUrl: userObj.imageUrl,
-                    // bio: userObj.bio,
-                    // familyName: userObj.familyName,
-                    // familyMembers: userObj.familyMembers
+                    userType: userObj.userType,
+                    imageUrl: userObj.imageUrl,
+                    location: userObj.location,
+                    familyName: userObj.familyName,
+                    story: userObj.story
                 };
+                if (req.session.user.userType == 'recipient' && userObj.familyName) {
+                    req.session.user.hasFilledOutForm = true;
+                } else {
+                    req.session.user.hasFilledOutForm = false;
+                }
                 res.json({
                     success: true
                 });

@@ -24,10 +24,12 @@ const router = express.Router();
 router.route('/userProfile')
 
     .get(function(req, res) {
+        console.log(req.session.user.hasFilledOutForm);
         res.json({
             id: req.session.user.id,
             firstName: req.session.user.firstName,
-            userType: req.session.user.userType
+            userType: req.session.user.userType,
+            hasFilledOutForm: req.session.user.hasFilledOutForm
         });
     });
 
