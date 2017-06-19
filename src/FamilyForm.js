@@ -11,20 +11,18 @@ export class FamilyForm extends React.Component {
             address: "",
             city: "Flint",
             state: "MI",
-            zipCode: ""
+            zipCode: "",
+            hasFilledOutForm: false
         };
         this.handleUserInfo = this.handleUserInfo.bind(this);
         this.submitUserInfo = this.submitUserInfo.bind(this);
     }
     componentWillUnmount() {
         console.log('Hit');
-        axios.get('/userProfile').then((res) => {
-            res.data.hasFilledOutForm = false;
-            console.log(res.data.hasFilledOutForm);
-            if (res.data.hasFilledOutForm == false) {
-                location.replace('/form/')
-            }
-        });
+        console.log('Log in componentWillUnmount', this.state.hasFilledOutForm);
+        if (this.state.hasFilledOutForm == false) {
+            location.replace('/form/')
+        }
         // in every route you could add a prop called 'onEnter' to check to see if they are valid to go to that route
     }
     submitUserInfo(e) {
@@ -44,7 +42,7 @@ export class FamilyForm extends React.Component {
         } else {
             axios.post('/submitRecipientInfo', {familyName: familyName, familyMembers: familyMembers, address: address, city: city, state: state, zipCode: zipCode})
             .then((res) => {
-                res.data.hasFilledOutForm = true;
+                this.state.hasFilledOutForm = true;
                 location.replace('/');
             }).catch((err) => {
                 console.log('Unable to submit user info', err);

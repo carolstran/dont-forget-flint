@@ -48,14 +48,17 @@ function insertRecipientInfo(familyName, familyMembers, address, city, state, zi
 }
 
 function checkAccount(email, password) {
-    let q = `SELECT * FROM users, recipients, donors
-             WHERE email = $1 AND (users.id = recipients.user_id OR users.id = donors.user_id);`;
+    let q = `SELECT * FROM users
+             LEFT JOIN recipients ON users.id = recipients.user_id
+             LEFT JOIN donors ON users.id = donors.user_id
+             WHERE email = $1;`;
     let params = [
         email
     ];
     return db.query(q, params)
     .then(function(result) {
         if (result.rows && result.rows[0]) {
+            console.log(result.rows);
             var hashedPassword = result.rows[0].password_hash;
             return auth.checkPassword(password, hashedPassword)
             .then(function(passwordMatch) {

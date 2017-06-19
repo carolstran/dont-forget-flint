@@ -14,13 +14,8 @@ export class App extends React.Component {
     }
     componentDidMount() {
         axios.get('/userProfile').then((res) => {
-            console.log(res.data.hasFilledOutForm);
-            if (res.data.userType == 'recipient' && res.data.hasFilledOutForm == false) {
-                location.replace('/form/');
-            } else {
-                const { id, firstName, userType } = res.data;
-                this.setState({ id, firstName, userType });
-            }
+            const { id, firstName, userType } = res.data;
+            this.setState({ id, firstName, userType });
         });
         // import browserHistory and do a browser push to form if information is not filled out
         // hadFilledOutForm: true or false
