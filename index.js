@@ -27,6 +27,7 @@ if (process.env.NODE_ENV != 'production') {
 // ROUTERS
 app.use(require('./routes/appRoutes'));
 app.use(require('./routes/authRoutes'));
+app.use(require('./routes/donationRoutes'));
 
 // CATCHALL ROUTE
 app.get('*', function(req, res) {

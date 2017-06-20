@@ -33,8 +33,6 @@ export class FamilyForm extends React.Component {
         let state = this.state.state;
         let zipCode = this.state.zipCode;
 
-        console.log(familyName, familyMembers, address, city, state, zipCode);
-
         if (!familyName || !familyMembers || !address || !city || !state || !zipCode) {
             this.setState({
                 notComplete: true

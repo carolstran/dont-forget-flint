@@ -4,6 +4,7 @@ import {Router, Route, Link, IndexRoute, hashHistory, browserHistory} from 'reac
 import axios from './axios';
 
 import {Welcome} from './Welcome';
+import {Intro} from './Intro';
 import {Login} from './Login';
 import {Register} from './Register';
 
@@ -12,6 +13,7 @@ import {Home} from './Home';
 import {Profile} from './Profile';
 
 import {Donate} from './Donate';
+import {CompletedDonation} from './CompletedDonation';
 
 import {FamilyForm} from './FamilyForm';
 import {Resources} from './Resources';
@@ -21,8 +23,9 @@ let elem;
 const loggedOutRouter = (
     <Router history={hashHistory}>
         <Route path="/" component={Welcome}>
+            <Route path="/register/" component={Register} />
             <Route path="/login/" component={Login} />
-            <IndexRoute component={Register} />
+            <IndexRoute component={Intro} />
         </Route>
     </Router>
 )
@@ -33,6 +36,7 @@ const loggedInRouter = (
             <Route path="/profile/" component={Profile} />
             <Route path="/form/" component={FamilyForm} />
             <Route path="/donate/" component={Donate} />
+            <Route path="/donate/done/" component={CompletedDonation} />
             <Route path="/resources/" component={Resources} />
             <IndexRoute component={Home} />
         </Route>

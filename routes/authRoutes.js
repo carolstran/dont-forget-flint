@@ -53,7 +53,6 @@ router.route('/submitRecipientInfo')
         db.insertRecipientInfo(familyName, familyMembers, address, city, state, zipCode, req.session.user.id)
         .then(function(result) {
             req.session.user.hasFilledOutForm = true;
-            console.log('Result from insertRecipientInfo DB query', result);
             res.json({
                 success: true,
                 hasFilledOutForm: true

@@ -91,7 +91,141 @@ function checkAccount(email, password) {
     });
 }
 
+function insertDonation(id, donationAmount, donationFrequency, donorMessage, additionalNotes) {
+    let q = `INSERT INTO donations (donor_id, donation_amount, donation_frequency, donor_message, additional_notes)
+             VALUES ($1, $2, $3, $4, $5);`;
+    let params = [
+        id,
+        donationAmount,
+        donationFrequency,
+        donorMessage,
+        additionalNotes
+    ];
+
+    return db.query(q, params)
+    .then(function(results) {
+        console.log('Here are the results from insertDonation DB', results);
+        console.log('Here is the results.rows[0]', results.rows[0]);
+        return results.rows[0];
+    }).catch(function(err) {
+        console.log('Error insertDonation in DB', err);
+        throw err;
+    });
+}
+
+function getRecipientIdForDonation(resultFromLastQuery) {
+    let q = // something
+    let params = [
+        resultFromLastQuery
+    ];
+
+    return db.query(q, params)
+    .then(function(results) {
+        console.log('Here are the results.rows of getRecipientIdForDonation', results.rows);
+        console.log('Here is the results.rows[0] of getRecipientIdForDonation', results.rows[0]);
+        return results.rows[0];
+    }).catch(function(err) {
+        console.log('Error getRecipientIdForDonation in DB', err);
+        throw err;
+    });
+}
+
+function insertRecipientIdIntoDonation(recipientId, donationId) {
+    let q = `INSERT INTO donations
+             VALUES ($1) WHERE id = $2;`;
+    let params = [
+        recipientId,
+        donationId
+    ];
+
+    return db.query(q, params)
+    .then(function(result) {
+        console.log('Here is the result from insertRecipientIdIntoDonation', result.rows[0]);
+        return result.rows[0];
+    }).catch(function(err) {
+        console.log('Error insertRecipientIdIntoDonation in DB', err);
+        throw err;
+    });
+}
+
+function getLatestDonation(donorId) {
+    let q = `SELECT * FROM donations
+             WHERE donor_id = $1;`;
+    let params = [
+        donorId
+    ];
+
+    return db.query(q, params)
+    .then(function(results) {
+        console.log('Here are the results of getLatestDonation', results);
+        return results.rows[0];
+    }).catch(function(err) {
+        console.log('Error getLatestDonation in DB', err);
+        throw err;
+    });
+}
+
+function getRecipientInfo(recipientId) {
+    let q = `SELECT * FROM donations
+             LEFT JOIN recipients ON donations.recipient_id = recipients.user_id
+             WHERE recipient_id = $1;`;
+    let params = [
+        recipientId
+    ];
+
+    return db.query(q, params)
+    .then(function(results) {
+        console.log('Results from getRecipientInfo in DB', results);
+        return results;
+    }).catch(function(err) {
+        console.log('Error getRecipientInfo in DB', err);
+        throw err;
+    });
+}
+
+function getAllDonationAndDonorInfo(recipientId) {
+    let q = `SELECT * FROM donations
+             LEFT JOIN donors ON donations.donor_id = donors.user_id
+             WHERE recipient_id = $1;`;
+    let params = [
+        recipientId
+    ];
+
+    return db.query(q, params)
+    .then(function(results) {
+        console.log('Results from getAllDonationAndDonorInfo in DB', results);
+        return results.rows;
+    }).catch(function(err) {
+        console.log('Error getAllDonationAndDonorInfo in DB', err);
+        throw err;
+    });
+}
+
+function getAllDonationsForUser(donorId) {
+    let q = `SELECT * FROM donations
+             LEFT JOIN recipients ON donations.recipient_id = recipients.user_id
+             WHERE donor_id = $1;`;
+    let params = [
+        donorId
+    ];
+
+    return db.query(q, params)
+    .then(function(results) {
+        console.log('Results from getAllDonationsForUser', results);
+        return results.rows;
+    }).catch(function(err) {
+        console.log('Error getAllDonationsForUser in DB', err);
+        throw err;
+    });
+}
+
 // EXPORTS
 module.exports.registerUser = registerUser;
 module.exports.insertRecipientInfo = insertRecipientInfo;
 module.exports.checkAccount = checkAccount;
+module.exports.insertDonation = insertDonation;
+module.exports.getRecipientIdForDonation = getRecipientIdForDonation;
+module.exports.insertRecipientIdIntoDonation = insertRecipientIdIntoDonation;
+module.exports.getLatestDonation = getLatestDonation;
+module.exports.getRecipientInfo = getRecipientInfo;
+module.exports.getAllDonationAndDonorInfo = getAllDonationAndDonorInfo;

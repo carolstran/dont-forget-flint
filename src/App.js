@@ -17,8 +17,6 @@ export class App extends React.Component {
             const { id, firstName, userType } = res.data;
             this.setState({ id, firstName, userType });
         });
-        // import browserHistory and do a browser push to form if information is not filled out
-        // hadFilledOutForm: true or false
     }
     handleLogout(e) {
         e.preventDefault();

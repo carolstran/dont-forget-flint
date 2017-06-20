@@ -55,7 +55,7 @@ a:hover {
 
 /* INPUTS, TEXT AREAS AND SELECTORS */
 
-input {
+input, textarea {
     margin: 0 10px;
     padding: 2px 5px 2px 5px;
     text-align: center;
@@ -108,6 +108,10 @@ select:focus {
     padding: 35px 0 15px 0;
 }
 
+#register-buttons-wrapper {
+    text-align: center;
+}
+
 .registration-wrapper {
     display: block;
 }
@@ -126,8 +130,18 @@ select:focus {
     margin: 0 auto;
 }
 
-#name-label, #members-label, #address-label, #city-label, #state-label, #zipcode-label, #continue-button {
+/* FAMILY FORM */
+
+#family-form label, button {
     margin-left: 10px;
+}
+
+#family-form input {
+    text-align: left;
+}
+
+#family-form-wrapper .error-message {
+    text-align: left;
 }
 
 /* IN-APP NAV BAR */
@@ -166,4 +180,32 @@ hr {
 .children {
     display: inline-block;
     margin-left: 50px;
+}
+
+/* DONATE COMPONENT */
+
+#donation-form select, textarea, label, button {
+    margin-left: 10px;
+}
+
+#donation-form input, textarea {
+    text-align: left;
+}
+
+#donation-form textarea {
+    width: 300px;
+    height: 50px;
+}
+
+#amount-input {
+    width: 45px;
+}
+
+#dollar-sign {
+    display: inline;
+    margin-left: 10px;
+}
+
+#donate-page-wrapper .error-message {
+    text-align: left;
 }

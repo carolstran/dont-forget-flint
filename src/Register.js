@@ -18,22 +18,6 @@ export class Register extends React.Component {
         this.changeUserType = this.changeUserType.bind(this);
         this.submitUserInfo = this.submitUserInfo.bind(this);
     }
-    // showRegistrationForm(e) {
-    //     this.setState({
-    //         toggleRegistrationForm: !this.state.toggleRegistrationForm,
-    //         showButtons: false
-    //     });
-    // }
-    // setUserTypeToFamily(e) {
-    //     this.setState({
-    //         userType: 'recipient'
-    //     });
-    // }
-    // setUserTypeToDonor(e) {
-    //     this.setState({
-    //         userType: 'donor'
-    //     });
-    // }
     submitUserInfo(e) {
         axios.post('/register', {firstName: this.state.firstName, lastName: this.state.lastName, email: this.state.email, password: this.state.password, userType: this.state.userType})
         .then((res) => {
@@ -92,10 +76,3 @@ export class Register extends React.Component {
         )
     }
 }
-
-// {this.state.showButtons &&
-//     <div className="show-form-button-wrapper">
-//     <button onClick={this.showRegistrationForm.bind(this) && this.setUserTypeToDonor.bind(this)} className="button">Register as a Donor</button>
-//     <button onClick={this.showRegistrationForm.bind(this) && this.setUserTypeToFamily.bind(this)} className="button">Register as a Family</button>
-//     </div>
-// }
