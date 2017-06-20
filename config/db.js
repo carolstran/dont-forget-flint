@@ -113,22 +113,22 @@ function insertDonation(id, donationAmount, donationFrequency, donorMessage, add
     });
 }
 
-function getRecipientIdForDonation(resultFromLastQuery) {
-    let q = // something
-    let params = [
-        resultFromLastQuery
-    ];
-
-    return db.query(q, params)
-    .then(function(results) {
-        console.log('Here are the results.rows of getRecipientIdForDonation', results.rows);
-        console.log('Here is the results.rows[0] of getRecipientIdForDonation', results.rows[0]);
-        return results.rows[0];
-    }).catch(function(err) {
-        console.log('Error getRecipientIdForDonation in DB', err);
-        throw err;
-    });
-}
+// function getRecipientIdForDonation(resultFromLastQuery) {
+//     let q = // something
+//     let params = [
+//         resultFromLastQuery
+//     ];
+//
+//     return db.query(q, params)
+//     .then(function(results) {
+//         console.log('Here are the results.rows of getRecipientIdForDonation', results.rows);
+//         console.log('Here is the results.rows[0] of getRecipientIdForDonation', results.rows[0]);
+//         return results.rows[0];
+//     }).catch(function(err) {
+//         console.log('Error getRecipientIdForDonation in DB', err);
+//         throw err;
+//     });
+// }
 
 function insertRecipientIdIntoDonation(recipientId, donationId) {
     let q = `INSERT INTO donations
@@ -224,8 +224,9 @@ module.exports.registerUser = registerUser;
 module.exports.insertRecipientInfo = insertRecipientInfo;
 module.exports.checkAccount = checkAccount;
 module.exports.insertDonation = insertDonation;
-module.exports.getRecipientIdForDonation = getRecipientIdForDonation;
+// module.exports.getRecipientIdForDonation = getRecipientIdForDonation;
 module.exports.insertRecipientIdIntoDonation = insertRecipientIdIntoDonation;
 module.exports.getLatestDonation = getLatestDonation;
 module.exports.getRecipientInfo = getRecipientInfo;
 module.exports.getAllDonationAndDonorInfo = getAllDonationAndDonorInfo;
+module.exports.getAllDonationsForUser = getAllDonationsForUser;

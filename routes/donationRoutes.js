@@ -5,11 +5,40 @@ const db = require('../config/db');
 
 router.route('/getDonationsMade')
 
-    .post(function(req, res) {
-        db.query(req.session.user.id)
-        .then(function(results){
-            //something!
-        })// catch!
+    .get(function(req, res) {
+        console.log('Get donations made hit!');
+        db.getAllDonationsForUser(req.session.user.id)
+        .then(function(results) {
+            console.log('Results from DB query', results);
+            res.json({
+                success: true,
+                donationsMade: results
+            });
+        }).catch(function(err) {
+            console.log('Error getting donations made', err);
+            res.json({
+                success: false
+            });
+        });
+    });
+
+router.route('/getDonationsReceived')
+
+    .get(function(req, res) {
+        console.log('Get donations received hit!');
+        db.getAllDonationAndDonorInfo(req.session.user.id)
+        .then(function(results) {
+            console.log('Results from DB query', results);
+            res.json({
+                success: true,
+                donationsReceived: results
+            });
+        }).catch(function(err) {
+            console.log('Error getting donations received', err);
+            res.json({
+                success: false
+            });
+        });
     });
 
 router.route('/placeDonation')
@@ -31,6 +60,9 @@ router.route('/placeDonation')
             });
         }).catch(function(err) {
             console.log('Error placing donation', err);
+            res.json({
+                success: false
+            });
         });
     });
 
