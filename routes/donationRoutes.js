@@ -6,7 +6,6 @@ const db = require('../config/db');
 router.route('/getDonationsMade')
 
     .get(function(req, res) {
-        console.log('Get donations made hit!');
         db.getAllDonationsForUser(req.session.user.id)
         .then(function(results) {
             res.json({
@@ -24,7 +23,6 @@ router.route('/getDonationsMade')
 router.route('/getDonationsReceived')
 
     .get(function(req, res) {
-        console.log('Get donations received hit!');
         db.getAllDonationAndDonorInfo(req.session.user.id)
         .then(function(results) {
             res.json({

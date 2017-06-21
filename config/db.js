@@ -92,34 +92,68 @@ function checkAccount(email, password) {
     });
 }
 
-function updateImageForDonor(file, id) {
-    let q = `UPDATE donors SET image_url = $1 WHERE user_id = $2;`;
+function updateImageForDonor(id, file) {
+    let q = `UPDATE donors SET image_url = $2 WHERE user_id = $1;`;
     let params = [
-        file,
-        id
+        id,
+        file
     ];
 
     return db.query(q, params)
     .then(function(result) {
-        return result;
+        if (result.rowCount == 0) {
+            let q = `INSERT INTO donors (user_id, image_url)
+                     VALUES ($1, $2);`;
+            let params = [
+                id,
+                file
+            ];
+
+            return db.query(q, params)
+            .then(function(result) {
+                return result;
+            }).catch(function(err) {
+                console.log('Error inserting donor in DB', err);
+                throw err;
+            });
+        } else {
+            return result;
+        }
     }).catch(function(err) {
         console.log('Error updateImageForDonor in DB', err);
         throw err;
     });
 }
 
-function updateImageForFamily(file, id) {
-    let q = `UPDATE recipients SET image_url = $1 WHERE user_id = $2;`;
+function updateImageForFamily(id, file) {
+    let q = `UPDATE recipients SET image_url = $2 WHERE user_id = $1;`;
     let params = [
-        file,
-        id
+        id,
+        file
     ];
 
     return db.query(q, params)
     .then(function(result) {
-        return result;
+        if (result.rowCount == 0) {
+            let q = `INSERT INTO recipients (user_id, image_url)
+                     VALUES ($1, $2);`;
+            let params = [
+                id,
+                file
+            ];
+
+            return db.query(q, params)
+            .then(function(result) {
+                return result;
+            }).catch(function(err) {
+                console.log('Error inserting donor in DB', err);
+                throw err;
+            });
+        } else {
+            return result;
+        }
     }).catch(function(err) {
-        console.log('Error updateImageForFamily in DB', err);
+        console.log('Error updateImageForDonor in DB', err);
         throw err;
     });
 }
@@ -196,8 +230,10 @@ function getLatestDonation(donorId) {
 }
 
 function getAllDonationAndDonorInfo(recipientId) {
-    let q = `SELECT * FROM donations
+    let q = `SELECT users.id, first_name, last_name, donors.user_id, donors.image_url, location, donor_id, recipient_id, donation_amount, donation_frequency, donor_message
+             FROM donations
              LEFT JOIN donors ON donations.donor_id = donors.user_id
+             LEFT JOIN users ON donations.donor_id = users.id
              WHERE recipient_id = $1;`;
     let params = [
         recipientId
@@ -205,7 +241,6 @@ function getAllDonationAndDonorInfo(recipientId) {
 
     return db.query(q, params)
     .then(function(results) {
-        console.log('Results from getAllDonationAndDonorInfo in DB', results.rows);
         return results.rows;
     }).catch(function(err) {
         console.log('Error getAllDonationAndDonorInfo in DB', err);
@@ -214,7 +249,8 @@ function getAllDonationAndDonorInfo(recipientId) {
 }
 
 function getAllDonationsForUser(donorId) {
-    let q = `SELECT * FROM donations
+    let q = `SELECT donor_id, recipient_id, donation_amount, donation_frequency, recipients.user_id, family_name, recipients.image_url, story
+             FROM donations
              LEFT JOIN recipients ON donations.recipient_id = recipients.user_id
              WHERE donor_id = $1;`;
     let params = [
@@ -223,7 +259,6 @@ function getAllDonationsForUser(donorId) {
 
     return db.query(q, params)
     .then(function(results) {
-        console.log('Results from getAllDonationsForUser', results.rows);
         return results.rows;
     }).catch(function(err) {
         console.log('Error getAllDonationsForUser in DB', err);

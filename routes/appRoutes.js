@@ -45,7 +45,7 @@ router.route('/uploadDonorFile')
         req.session.user.imageUrl = file;
 
         if (req.file) {
-            db.updateImageForDonor(file, req.session.user.id).then(function() {
+            db.updateImageForDonor(req.session.user.id, file).then(function() {
                 res.json({
                     success: true,
                     id: req.session.user.id,
@@ -71,7 +71,7 @@ router.route('/uploadFamilyFile')
         req.session.user.imageUrl = file;
 
         if (req.file) {
-            db.updateImageForFamily(file, req.session.user.id).then(function() {
+            db.updateImageForFamily(req.session.user.id, file).then(function() {
                 res.json({
                     success: true,
                     id: req.session.user.id,

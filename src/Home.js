@@ -8,19 +8,14 @@ export class Home extends React.Component {
         this.state = {};
     }
     componentDidMount() {
-        console.log('Home componentDidMount props', this.props);
-
         if (this.props.userType == 'donor') {
-            console.log('componentWillMount inside of home');
             axios.get('/getDonationsMade').then((res) => {
-                console.log('Successful /getDonationsMade', res.data);
                 this.setState({
                     donationsMade: res.data.donationsMade
                 });
             });
         } else if (this.props.userType == 'recipient') {
             axios.get('/getDonationsReceived').then((res) => {
-                console.log('Successful /getDonationsReceived', res.data);
                 this.setState({
                     donationsReceived: res.data.donationsReceived
                 });
@@ -29,7 +24,6 @@ export class Home extends React.Component {
     }
     render() {
         if (this.props.userType == 'donor') {
-            console.log('There are donations', this.state.donationsMade);
             if (this.state.donationsMade && this.state.donationsMade.length) {
                 return (
                     <div className="donations-wrapper">

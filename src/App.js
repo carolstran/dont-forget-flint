@@ -11,13 +11,12 @@ export class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
+        this.setImage = this.setImage.bind(this);
     }
     componentWillMount() {
         axios.get('/userProfile').then((res) => {
             const { id, firstName, lastName, email, userType, imageUrl, location, familyName, story } = res.data;
-            this.setState({ id, firstName, lastName, email, userType, imageUrl, location, familyName, story }, () => {
-                console.log('State successfully set', this.state);
-            });
+            this.setState({ id, firstName, lastName, email, userType, imageUrl, location, familyName, story });
         });
     }
     handleLogout(e) {
@@ -26,11 +25,14 @@ export class App extends React.Component {
             location.replace('/');
         });
     }
+    setImage(url) {
+        this.setState({
+            imageUrl: url
+        });
+    }
     render() {
         const { id, firstName, lastName, email, userType, imageUrl, location, familyName, story } = this.state;
-        const children = React.cloneElement(this.props.children, { id, firstName, lastName, email, userType, imageUrl, location, familyName, story });
-
-        console.log('Chiiiiildren', children);
+        const children = React.cloneElement(this.props.children, { id, firstName, lastName, email, userType, setImage: this.setImage, imageUrl, location, familyName, story });
 
         if (this.state.userType == 'donor') {
             return (
