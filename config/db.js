@@ -74,7 +74,7 @@ function checkAccount(email, password) {
                     userLastName: result.rows[0].last_name,
                     userType: result.rows[0].user_type,
                     imageUrl: result.rows[0].image_url,
-                    location: result.rows[0].bio,
+                    location: result.rows[0].location,
                     familyName: result.rows[0].familyName,
                     story: result.rows[0].story
                 };
@@ -87,6 +87,38 @@ function checkAccount(email, password) {
         }
     }).catch(function(err) {
         console.log('Error checkAccount in DB', err);
+        throw err;
+    });
+}
+
+function updateImageForDonor(file, id) {
+    let q = `UPDATE donors SET image_url = $1 WHERE user_id = $2;`;
+    let params = [
+        file,
+        id
+    ];
+
+    return db.query(q, params)
+    .then(function(result) {
+        return result;
+    }).catch(function(err) {
+        console.log('Error updateImageForDonor in DB', err);
+        throw err;
+    });
+}
+
+function updateImageForFamily(file, id) {
+    let q = `UPDATE recipients SET image_url = $1 WHERE user_id = $2;`;
+    let params = [
+        file,
+        id
+    ];
+
+    return db.query(q, params)
+    .then(function(result) {
+        return result;
+    }).catch(function(err) {
+        console.log('Error updateImageForFamily in DB', err);
         throw err;
     });
 }
@@ -223,6 +255,8 @@ function getAllDonationsForUser(donorId) {
 module.exports.registerUser = registerUser;
 module.exports.insertRecipientInfo = insertRecipientInfo;
 module.exports.checkAccount = checkAccount;
+module.exports.updateImageForDonor = updateImageForDonor;
+module.exports.updateImageForFamily = updateImageForFamily;
 module.exports.insertDonation = insertDonation;
 // module.exports.getRecipientIdForDonation = getRecipientIdForDonation;
 module.exports.insertRecipientIdIntoDonation = insertRecipientIdIntoDonation;
