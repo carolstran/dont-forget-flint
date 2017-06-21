@@ -42,7 +42,7 @@ export class Login extends React.Component {
                     </label><br />
                     <button type="button" className="button" onClick={this.loginUser}>LOGIN</button><br />
                 </div><br />
-                <p className="redirect-to">{'Not a member? Register '}<Link to="/">{'here'}</Link>.</p>
+                <p className="redirect-to">{'Not a member? Register '}<Link to="/register/">{'here'}</Link>.</p>
             </div>
         )
     }

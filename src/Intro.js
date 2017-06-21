@@ -9,14 +9,13 @@ export class Intro extends React.Component {
     render() {
         return (
             <div id="intro-wrapper">
-                <h2 className="welcome-text">Welcome to Don't Forget Flint.</h2><br />
-                <p className="welcome-text">Something sort of introduction.</p><br />
+                <h2 className="welcome-text">Welcome to Don't Forget Flint.<br />
+                Connecting actual Flint families with potential donors.</h2><br />
                 <br />
                 <div id="register-buttons-wrapper">
-                <Link to="/register/"><button type="button" className="button">Register as a Donor</button></Link>
-                <Link to="/register/"><button type="button" className="button">Register as a Family</button></Link>
+                <Link to="/register/"><button type="button" className="button">Register</button></Link>
+                <Link to="/login/"><button type="button" className="button">Login</button></Link>
                 </div>
-                <p className="redirect-to">{'If you already have an account, please '}<Link to="/login/">{'log in'}</Link>.</p>
             </div>
         )
     }
