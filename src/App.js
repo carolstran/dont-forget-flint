@@ -12,10 +12,12 @@ export class App extends React.Component {
         super(props);
         this.state = {};
     }
-    componentDidMount() {
+    componentWillMount() {
         axios.get('/userProfile').then((res) => {
-            const { id, firstName, userType } = res.data;
-            this.setState({ id, firstName, userType });
+            const { id, firstName, lastName, email, userType, imageUrl, location, familyName, story } = res.data;
+            this.setState({ id, firstName, lastName, email, userType, imageUrl, location, familyName, story }, () => {
+                console.log('State successfully set', this.state);
+            });
         });
     }
     handleLogout(e) {
@@ -25,8 +27,10 @@ export class App extends React.Component {
         });
     }
     render() {
-        const { id, firstName, userType } = this.state;
-        const children = React.cloneElement(this.props.children, { id, firstName, userType });
+        const { id, firstName, lastName, email, userType, imageUrl, location, familyName, story } = this.state;
+        const children = React.cloneElement(this.props.children, { id, firstName, lastName, email, userType, imageUrl, location, familyName, story });
+
+        console.log('Chiiiiildren', children);
 
         if (this.state.userType == 'donor') {
             return (
@@ -46,7 +50,7 @@ export class App extends React.Component {
                     </div>
                 </div>
             )
-        } else {
+        } else if (this.state.userType == 'recipient') {
             return (
                 <div id="app-wrapper">
                     <div id="nav-bar">
@@ -64,6 +68,8 @@ export class App extends React.Component {
                     </div>
                 </div>
             )
+        } else {
+            return null;
         }
     }
 }

@@ -1,7 +1,6 @@
 import React from 'react';
-import {Router, Route, Link, IndexRoute, hashHistory} from 'react-router';
+import {Link} from 'react-router';
 import axios from './axios';
-import {App} from './App';
 
 export class Home extends React.Component {
     constructor(props) {
@@ -9,14 +8,19 @@ export class Home extends React.Component {
         this.state = {};
     }
     componentDidMount() {
+        console.log('Home componentDidMount props', this.props);
+
         if (this.props.userType == 'donor') {
+            console.log('componentWillMount inside of home');
             axios.get('/getDonationsMade').then((res) => {
+                console.log('Successful /getDonationsMade', res.data);
                 this.setState({
                     donationsMade: res.data.donationsMade
                 });
             });
-        } else {
+        } else if (this.props.userType == 'recipient') {
             axios.get('/getDonationsReceived').then((res) => {
+                console.log('Successful /getDonationsReceived', res.data);
                 this.setState({
                     donationsReceived: res.data.donationsReceived
                 });
@@ -25,7 +29,8 @@ export class Home extends React.Component {
     }
     render() {
         if (this.props.userType == 'donor') {
-            if (this.state.donationsMade) {
+            console.log('There are donations', this.state.donationsMade);
+            if (this.state.donationsMade && this.state.donationsMade.length) {
                 return (
                     <div className="donations-wrapper">
                         <h1>Hey {this.props.firstName}! Here are the donations you've made.</h1><br />
@@ -52,7 +57,7 @@ export class Home extends React.Component {
                 )
             }
         } else {
-            if (this.state.donationsReceived) {
+            if (this.state.donationsReceived && this.state.donationsReceived.length) {
                 return (
                     <div className="donations-wrapper">
                         <h1>Hey {this.props.firstName}! Here are the donations you've received.</h1><br />

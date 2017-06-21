@@ -6,7 +6,7 @@ export class Donate extends React.Component {
         super(props);
         this.state = {
             donationAmount: "",
-            donationFrequency: 'oneTime',
+            donationFrequency: 'one time',
             donorMessage: "",
             additionalNotes: ""
         };
@@ -63,7 +63,7 @@ export class Donate extends React.Component {
                     </label><br />
                     <label for="donationFrequency" className="selector-wrapper">How Often<em>*</em><br />
                         <select className="styled-select" onChange={this.changeDonationFrequency}>
-                            <option value="oneTime">One Time</option>
+                            <option value="one time">One Time</option>
                             <option value="monthly">Monthly</option>
                             <option value="weekly">Weekly</option>
                         </select>
