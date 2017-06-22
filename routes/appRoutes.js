@@ -24,6 +24,7 @@ var uploader = multer({
 router.route('/userProfile')
 
     .get(function(req, res) {
+        console.log(req.session.user.imageUrl);
         res.json({
             id: req.session.user.id,
             email: req.session.user.email,
@@ -42,10 +43,10 @@ router.route('/uploadDonorFile')
 
     .post(uploader.single('file'), function(req, res) {
         let file = `/uploads/${req.file.filename}`;
-        req.session.user.imageUrl = file;
 
         if (req.file) {
             db.updateImageForDonor(req.session.user.id, file).then(function() {
+                req.session.user.imageUrl = file;
                 res.json({
                     success: true,
                     id: req.session.user.id,
@@ -68,10 +69,10 @@ router.route('/uploadFamilyFile')
 
     .post(uploader.single('file'), function(req, res) {
         let file = `/uploads/${req.file.filename}`;
-        req.session.user.imageUrl = file;
 
         if (req.file) {
             db.updateImageForFamily(req.session.user.id, file).then(function() {
+                req.session.user.imageUrl = file;
                 res.json({
                     success: true,
                     id: req.session.user.id,
@@ -93,10 +94,8 @@ router.route('/uploadFamilyFile')
 router.route('/updateDonorLocation')
 
     .post(function(req, res) {
-        console.log('Made it to /updateDonorLocation post route');
         db.updateLocation(req.body.location, req.session.user.id)
         .then(function() {
-            console.log('DB for updateLocation ran and now we are back on server');
             req.session.user.location = req.body.location;
             res.json({
                 success: true,
@@ -111,10 +110,8 @@ router.route('/updateDonorLocation')
 router.route('/updateFamilyStory')
 
     .post(function(req, res) {
-        console.log('Made it to /updateFamilyStory post route');
         db.updateStory(req.body.story, req.session.user.id)
         .then(function() {
-            console.log('DB for updateStory ran and now we are back on server');
             req.session.user.story = req.body.story;
             res.json({
                 success: true,

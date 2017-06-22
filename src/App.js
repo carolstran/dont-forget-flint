@@ -29,25 +29,25 @@ export class App extends React.Component {
         });
     }
     setImage(url) {
+        console.log(url);
         this.setState({
             imageUrl: url
         });
     }
     updateLocation(data) {
-        console.log('Hello updateLocation is working', data);
         this.setState({
             location: data.location,
             showEditInfo: false
         });
     }
     updateStory(data) {
-        console.log('Hello updateStory is working', data);
         this.setState({
             story: data.story,
             showEditInfo: false
         });
     }
     render() {
+        console.log(this.state.imageUrl);
         const { id, firstName, lastName, email, userType, imageUrl, location, familyName, story } = this.state;
         const children = React.cloneElement(this.props.children, { id, firstName, lastName, email, userType, setImage: this.setImage, imageUrl, updateLocation: this.updateLocation, location, familyName, updateStory: this.updateStory, story });
 

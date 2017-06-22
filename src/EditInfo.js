@@ -12,24 +12,18 @@ export class EditInfo extends React.Component {
         this.closeEditInfo = this.closeEditInfo.bind(this);
     }
     handleSaveInfo(e) {
-        console.log(this.props.userType);
         if (this.props.userType == 'donor') {
-            console.log('Here is info', this.state.info);
             axios.post('/updateDonorLocation', { location: this.state.info })
             .then((res) => {
-                console.log('Axios ran for donor');
                 if (res.data.success) {
-                    console.log('Successful data', res.data);
                     this.props.updateLocation(res.data);
                     this.props.toggleEditInfo();
                 }
             });
         } else if (this.props.userType == 'recipient') {
-            console.log('Here is info', this.state.info);
             axios.post('/updateFamilyStory', { story: this.state.info })
             .then((res) => {
                 if (res.data.success) {
-                    console.log('Successful data', res.data);
                     this.props.updateStory(res.data);
                     this.props.toggleEditInfo();
                 }

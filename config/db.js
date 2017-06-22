@@ -48,7 +48,7 @@ function insertRecipientInfo(familyName, familyMembers, address, city, state, zi
 }
 
 function checkAccount(email, password) {
-    let q = `SELECT users.id, first_name, last_name, email, password_hash, user_type, donors.image_url, location, family_name, recipients.image_url, story
+    let q = `SELECT users.id, first_name, last_name, email, password_hash, user_type, donors.image_url AS donor_image, location, family_name, recipients.image_url AS recipient_image, story
              FROM users
              LEFT JOIN recipients ON users.id = recipients.user_id
              LEFT JOIN donors ON users.id = donors.user_id
@@ -59,7 +59,6 @@ function checkAccount(email, password) {
     return db.query(q, params)
     .then(function(result) {
         if (result.rows && result.rows[0]) {
-            console.log(result.rows);
             var hashedPassword = result.rows[0].password_hash;
             return auth.checkPassword(password, hashedPassword)
             .then(function(passwordMatch) {
@@ -74,7 +73,7 @@ function checkAccount(email, password) {
                     userFirstName: result.rows[0].first_name,
                     userLastName: result.rows[0].last_name,
                     userType: result.rows[0].user_type,
-                    imageUrl: result.rows[0].image_url,
+                    imageUrl: result.rows[0].donor_image || result.rows[0].recipient_image,
                     location: result.rows[0].location,
                     familyName: result.rows[0].familyName,
                     story: result.rows[0].story
@@ -159,7 +158,6 @@ function updateImageForFamily(id, file) {
 }
 
 function updateLocation(location, id) {
-    console.log('Made it into DB');
     let q = `UPDATE donors SET location = $1 WHERE user_id = $2;`;
     let params = [
         location,
@@ -168,7 +166,6 @@ function updateLocation(location, id) {
 
     return db.query(q, params)
     .then(function(result) {
-        console.log('We have results!', result);
         if (result.rowCount == 0) {
             let q = `INSERT INTO donors (user_id, location)
                      VALUES ($2, $1);`;
@@ -194,7 +191,6 @@ function updateLocation(location, id) {
 }
 
 function updateStory(story, id) {
-    console.log('Made it into DB');
     let q = `UPDATE recipients SET story = $1 WHERE user_id = $2;`;
     let params = [
         story,
@@ -203,7 +199,6 @@ function updateStory(story, id) {
     console.log(params);
     return db.query(q, params)
     .then(function(result) {
-        console.log('We have results!', result);
         if (result.rowCount == 0) {
             let q = `INSERT INTO recipients (user_id, story)
                      VALUES ($2, $1);`;
@@ -291,7 +286,6 @@ function getLatestDonation(donorId) {
 
     return db.query(q, params)
     .then(function(results) {
-        console.log('Here are the results of getLatestDonation', results.rows[0]);
         return results.rows[0];
     }).catch(function(err) {
         console.log('Error getLatestDonation in DB', err);

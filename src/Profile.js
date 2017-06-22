@@ -44,6 +44,8 @@ export class Profile extends React.Component {
         });
     }
     render() {
+        console.log(this.props.userType);
+        console.log(this.props.imageUrl);
         if (this.props.userType == 'donor') {
             return (
                 <div id="profile-page">
