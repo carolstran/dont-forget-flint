@@ -146,6 +146,41 @@ function updateImageForFamily(id, file) {
             .then(function(result) {
                 return result;
             }).catch(function(err) {
+                console.log('Error inserting recipient in DB', err);
+                throw err;
+            });
+        } else {
+            return result;
+        }
+    }).catch(function(err) {
+        console.log('Error updateImageForFamily in DB', err);
+        throw err;
+    });
+}
+
+function updateLocation(location, id) {
+    console.log('Made it into DB');
+    let q = `UPDATE donors SET location = $1 WHERE user_id = $2;`;
+    let params = [
+        location,
+        id
+    ];
+
+    return db.query(q, params)
+    .then(function(result) {
+        console.log('We have results!', result);
+        if (result.rowCount == 0) {
+            let q = `INSERT INTO donors (user_id, location)
+                     VALUES ($2, $1);`;
+            let params = [
+                location,
+                id
+            ];
+
+            return db.query(q, params)
+            .then(function(result) {
+                return result;
+            }).catch(function(err) {
                 console.log('Error inserting donor in DB', err);
                 throw err;
             });
@@ -153,7 +188,42 @@ function updateImageForFamily(id, file) {
             return result;
         }
     }).catch(function(err) {
-        console.log('Error updateImageForDonor in DB', err);
+        console.log('Error updateLocation in DB', err);
+        throw err;
+    });
+}
+
+function updateStory(story, id) {
+    console.log('Made it into DB');
+    let q = `UPDATE recipients SET story = $1 WHERE user_id = $2;`;
+    let params = [
+        story,
+        id
+    ];
+    console.log(params);
+    return db.query(q, params)
+    .then(function(result) {
+        console.log('We have results!', result);
+        if (result.rowCount == 0) {
+            let q = `INSERT INTO recipients (user_id, story)
+                     VALUES ($2, $1);`;
+            let params = [
+                story,
+                id
+            ];
+
+            return db.query(q, params)
+            .then(function(result) {
+                return result;
+            }).catch(function(err) {
+                console.log('Error inserting recipient in DB', err);
+                throw err;
+            });
+        } else {
+            return result;
+        }
+    }).catch(function(err) {
+        console.log('Error updateStory in DB', err);
         throw err;
     });
 }
@@ -272,6 +342,8 @@ module.exports.insertRecipientInfo = insertRecipientInfo;
 module.exports.checkAccount = checkAccount;
 module.exports.updateImageForDonor = updateImageForDonor;
 module.exports.updateImageForFamily = updateImageForFamily;
+module.exports.updateLocation = updateLocation;
+module.exports.updateStory = updateStory;
 module.exports.insertDonation = insertDonation;
 module.exports.getRecipientIdForDonation = getRecipientIdForDonation;
 module.exports.putRecipientIdInDonation = putRecipientIdInDonation;

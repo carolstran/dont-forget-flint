@@ -90,4 +90,40 @@ router.route('/uploadFamilyFile')
         }
     });
 
+router.route('/updateDonorLocation')
+
+    .post(function(req, res) {
+        console.log('Made it to /updateDonorLocation post route');
+        db.updateLocation(req.body.location, req.session.user.id)
+        .then(function() {
+            console.log('DB for updateLocation ran and now we are back on server');
+            req.session.user.location = req.body.location;
+            res.json({
+                success: true,
+                id: req.session.user.id,
+                location: req.session.user.location
+            });
+        }).catch(function(err) {
+            console.log('Error updating donor location', err);
+        });
+    });
+
+router.route('/updateFamilyStory')
+
+    .post(function(req, res) {
+        console.log('Made it to /updateFamilyStory post route');
+        db.updateStory(req.body.story, req.session.user.id)
+        .then(function() {
+            console.log('DB for updateStory ran and now we are back on server');
+            req.session.user.story = req.body.story;
+            res.json({
+                success: true,
+                id: req.session.user.id,
+                story: req.session.user.story
+            });
+        }).catch(function(err) {
+            console.log('Error updating family story', err);
+        });
+    });
+
 module.exports = router;

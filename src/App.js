@@ -6,12 +6,15 @@ import Logo from './Logo';
 import {FamilyForm} from './FamilyForm';
 import {Home} from './Home';
 import {Profile} from './Profile'
+import {EditInfo} from './EditInfo';
 
 export class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
         this.setImage = this.setImage.bind(this);
+        this.updateLocation = this.updateLocation.bind(this);
+        this.updateStory = this.updateStory.bind(this);
     }
     componentWillMount() {
         axios.get('/userProfile').then((res) => {
@@ -30,9 +33,23 @@ export class App extends React.Component {
             imageUrl: url
         });
     }
+    updateLocation(data) {
+        console.log('Hello updateLocation is working', data);
+        this.setState({
+            location: data.location,
+            showEditInfo: false
+        });
+    }
+    updateStory(data) {
+        console.log('Hello updateStory is working', data);
+        this.setState({
+            story: data.story,
+            showEditInfo: false
+        });
+    }
     render() {
         const { id, firstName, lastName, email, userType, imageUrl, location, familyName, story } = this.state;
-        const children = React.cloneElement(this.props.children, { id, firstName, lastName, email, userType, setImage: this.setImage, imageUrl, location, familyName, story });
+        const children = React.cloneElement(this.props.children, { id, firstName, lastName, email, userType, setImage: this.setImage, imageUrl, updateLocation: this.updateLocation, location, familyName, updateStory: this.updateStory, story });
 
         if (this.state.userType == 'donor') {
             return (
