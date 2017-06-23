@@ -226,12 +226,20 @@ th {
     padding-bottom: 5px;
 }
 
-#table-header {
+.table-header {
     border-bottom: 2px solid #EBC789;
 }
 
-#amount {
-    padding-left: 75px;
+#donor-amount-given {
+    padding-left: 20px;
+}
+
+.table-amount {
+    padding-left: 65px;
+}
+
+#amount-recipient-table {
+    padding-left: px;
 }
 
 .how-often {
@@ -282,7 +290,7 @@ li {
 }
 
 .families-wrapper {
-    width: 900px;
+    /*width: 900px;*/
     display: inline-block;
     margin: 50px 0 100px 0;
 }
@@ -303,12 +311,16 @@ li {
 .text-wrapper {
     display: inline-block;
     vertical-align: top;
-    float: right;
     position: relative;
 }
 
 .donation-name {
     margin-bottom: 0;
+}
+
+.donor-name {
+    margin-bottom: 0;
+    margin-top: 5px;
 }
 
 .donation-text p {
@@ -321,6 +333,12 @@ li {
     text-align: justify;
 }
 
+#donor-location {
+    margin: 0 0 15px 0;
+    max-width: 300px;
+    text-align: justify;
+}
+
 /* DONATE COMPONENT */
 
 .donate-page-wrapper {
@@ -329,6 +347,11 @@ li {
 
 .donate-page-wrapper .error-message {
     text-align: left;
+}
+
+.donate-page-wrapper img {
+    height: 300px;
+    padding: 0 10px 20px 10px;
 }
 
 #donation-form {

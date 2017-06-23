@@ -42,7 +42,7 @@ export class Home extends React.Component {
                                             <thead>
                                                 <tr>
                                                     <th id="date-placed">Date Placed</th>
-                                                    <th id="amount">Amount</th>
+                                                    <th className="table-amount">Amount</th>
                                                     <th>How Often</th>
                                                     <th>Family</th>
                                                 </tr>
@@ -55,8 +55,8 @@ export class Home extends React.Component {
                                                     <table id="table-body">
                                                         <tbody>
                                                             <tr>
-                                                                <td>{donation.created_at}</td>
-                                                                <td>${donation.donation_amount}</td>
+                                                                <td>{(new Date(donation.created_at)).toLocaleString()}</td>
+                                                                <td id="donor-amount-given">${donation.donation_amount}</td>
                                                                 <td className="how-often">{donation.donation_frequency}</td>
                                                                 <td className="table-family">{donation.family_name}</td>
                                                             </tr>
@@ -106,20 +106,53 @@ export class Home extends React.Component {
                 return (
                     <div className="donations-wrapper">
                         <h1 className="inapp-h1">Donations You've Received</h1><br />
-                        {this.state.donationsReceived && this.state.donationsReceived.map(donation => {
-                            return (
                                 <div className="single-donation">
-                                    <div className="donation-image">
-                                        <img src={donation.image_url || "/public/assets/blank-avatar.jpg"} />
-                                    </div>
-                                    <div className="donation-text">
-                                        <h2 className="donation-name">{donation.first_name} {donation.last_name} in {donation.location}<br />
-                                        Donated ${donation.donation_amount} {donation.donation_frequency}</h2>
-                                        <p className="story-message">"{donation.donor_message}"</p>
-                                    </div>
+                                    <table className="table-header">
+                                        <thead>
+                                            <tr>
+                                                <th>Date Received</th>
+                                                <th id="amount-recipient-table">Amount</th>
+                                                <th>How Often</th>
+                                                <th>From</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                    {this.state.donationsReceived && this.state.donationsReceived.map(donation => {
+                                        return (
+                                            <div>
+                                                <table id="table-body">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>{(new Date(donation.created_at)).toLocaleString()}</td>
+                                                            <td>${donation.donation_amount}</td>
+                                                            <td className="how-often">{donation.donation_frequency}</td>
+                                                            <td className="table-family">{donation.first_name}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table><br />
+                                            </div>
+                                        )
+                                    })}
+                                <div className="families-wrapper">
+                                    <h1 className="inapp-h1">Your Donors</h1>
+                                    {this.state.donationsReceived && this.state.donationsReceived.map(donation => {
+                                        return (
+                                            <div className="single-family">
+                                                <div className="family-image">
+                                                    <img src={donation.image_url || "/public/assets/blank-avatar.jpg"} onClick={this.toggleFamilyInfo} />
+                                                </div>
+                                                {this.state.displayFamilyInfo &&
+                                                    <div className="text-wrapper">
+                                                        <h2 className="donor-name">{donation.first_name} {donation.last_name}</h2>
+                                                        <p id="donor-location">From {donation.location}</p>
+                                                        <p className="story-message">"{donation.donor_message}"</p>
+                                                    </div>
+                                                }
+                                            </div>
+                                        )
+                                    })}
                                 </div>
-                            )
-                        })}
+                            </div>
                     </div>
                 )
             } else {

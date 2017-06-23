@@ -9,7 +9,7 @@ export class Intro extends React.Component {
     render() {
         return (
             <div id="intro-wrapper">
-                <h2 className="welcome-text">Flint has been without clean water since April 24, 2014.<br />
+                <h2 className="welcome-text">Flint has been without clean water since April 25, 2014.<br />
                 So we're connecting actual Flint families with water donors.</h2><br />
                 <br />
                 <div id="register-buttons-wrapper">
