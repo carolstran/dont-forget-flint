@@ -72,7 +72,7 @@ export class Donate extends React.Component {
                     <button type="button" className="button" onClick={this.submitUserInfo}>&gt; Submit</button>
                 </div><br />
                 <h1 className="inapp-h1">Here's How We See It:</h1><br />
-                <img src="/public/assets/bottles.png" />
+                <img src="/public/assets/bottles-lightbckgrd.png" />
             </div>
         )
     }
