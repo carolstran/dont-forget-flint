@@ -18,12 +18,9 @@ export class FamilyForm extends React.Component {
         this.submitUserInfo = this.submitUserInfo.bind(this);
     }
     componentWillUnmount() {
-        console.log('Hit');
-        console.log('Log in componentWillUnmount', this.state.hasFilledOutForm);
         if (this.state.hasFilledOutForm == false) {
             location.replace('/form/')
         }
-        // in every route you could add a prop called 'onEnter' to check to see if they are valid to go to that route
     }
     submitUserInfo(e) {
         let familyName = this.state.familyName;
@@ -58,12 +55,7 @@ export class FamilyForm extends React.Component {
     render() {
         return (
             <div id="family-form-wrapper">
-                <h2>Just one more step!</h2>
-                <p>To complete your registration, we need to know where to send the donations.<br />
-                By providing this information, you consent to having your address given to a third party water distributor.<br />
-                <br />
-                Don't worry, we promise to keep this information safe and secure!</p><br />
-                <h2>Please fill out the form below. All fields are required.</h2>
+                <h2>Just one more step! All fields are required.</h2>
                 {this.state.error && <div className="error-message">{'Something went wrong! Please try again.'}</div>}
                 {this.state.notComplete && <div className="error-message">{'You must fill out every field to continue.'}</div>}
                 <div id="family-form">
@@ -84,8 +76,8 @@ export class FamilyForm extends React.Component {
                     </label><br />
                     <label for="zipCode" id="zipcode-label" class="input-labels">Zip Code<em>*</em><br />
                         <input type="number" id="zip-code-input" name="zipCode" onChange={this.handleUserInfo} required /><br />
-                    </label><br />
-                    <button type="button" id="continue-button" className="button" onClick={this.submitUserInfo}>CONTINUE</button>
+                    </label><br /><br />
+                    <button type="button" id="continue-button" className="button" onClick={this.submitUserInfo}>&gt; CONTINUE</button>
                 </div><br />
             </div>
         )

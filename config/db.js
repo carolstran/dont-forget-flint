@@ -196,7 +196,6 @@ function updateStory(story, id) {
         story,
         id
     ];
-    console.log(params);
     return db.query(q, params)
     .then(function(result) {
         if (result.rowCount == 0) {
@@ -294,7 +293,7 @@ function getLatestDonation(donorId) {
 }
 
 function getAllDonationAndDonorInfo(recipientId) {
-    let q = `SELECT users.id, first_name, last_name, donors.user_id, donors.image_url, location, donor_id, recipient_id, donation_amount, donation_frequency, donor_message
+    let q = `SELECT users.id, first_name, last_name, donors.user_id, donors.image_url, location, donor_id, recipient_id, donation_amount, donation_frequency, donations.created_at, donor_message
              FROM donations
              LEFT JOIN donors ON donations.donor_id = donors.user_id
              LEFT JOIN users ON donations.donor_id = users.id
@@ -313,7 +312,7 @@ function getAllDonationAndDonorInfo(recipientId) {
 }
 
 function getAllDonationsForUser(donorId) {
-    let q = `SELECT donor_id, recipient_id, donation_amount, donation_frequency, recipients.user_id, family_name, recipients.image_url, story
+    let q = `SELECT donor_id, recipient_id, donation_amount, donation_frequency, donations.created_at, recipients.user_id, family_name, recipients.image_url, story
              FROM donations
              LEFT JOIN recipients ON donations.recipient_id = recipients.user_id
              WHERE donor_id = $1;`;

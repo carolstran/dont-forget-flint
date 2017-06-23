@@ -44,36 +44,46 @@ export class Profile extends React.Component {
         });
     }
     render() {
-        console.log(this.props.userType);
-        console.log(this.props.imageUrl);
         if (this.props.userType == 'donor') {
             return (
                 <div id="profile-page">
-                    <h1>DONOR TESTING</h1>
-                    <h2>We'd love to know more about you to tell the family that receives your donation.</h2>
-
-                    <p>Upload an image of yourself</p><br />
-                    <img src={this.props.imageUrl || "/public/assets/blank-avatar.jpg"} /><br />
-                    <input type="file" className="button" onChange={this.handlePicInfo} /><br />
-                    <button className="button" type="submit" onClick={this.handlePicUpload}>UPLOAD</button><br />
+                    <h1 className="inapp-h1">Your Donor Profile</h1><br />
                     <br />
-                    <div className="profile-location">
-                        {this.state.showEditInfo ? <EditInfo toggleEditInfo={this.toggleEditInfo} updateLocation={this.props.updateLocation} userType={this.props.userType} /> : <DonorLocation location={this.props.location} toggleEditInfo={this.toggleEditInfo} userType={this.props.userType} />}
+                    <div className="profile-image">
+                        <img src={this.props.imageUrl || "/public/assets/blank-avatar.jpg"} />
+                    </div>
+                    <div className="profile-text">
+                        <h2>Share a Photo</h2>
+                        <input type="file" className="file-input" onChange={this.handlePicInfo} /><br />
+                        <br />
+                        <button className="button" type="submit" onClick={this.handlePicUpload}>&gt; UPLOAD</button><br />
+                        <br />
+                        <h2>Where are you from?</h2>
+                        <div className="profile-location">
+                            {this.state.showEditInfo ? <EditInfo toggleEditInfo={this.toggleEditInfo} updateLocation={this.props.updateLocation} userType={this.props.userType} /> : <DonorLocation location={this.props.location} toggleEditInfo={this.toggleEditInfo} userType={this.props.userType} />}
+                        </div>
                     </div>
                 </div>
             )
         } else {
             return (
                 <div id="profile-page">
-                <h1>FAMILY TESTING</h1>
-                <p>Upload an image of yourself</p><br />
-                <img src={this.props.imageUrl || "/public/assets/blank-avatar.jpg"} />
-                <input type="file" className="button" onChange={this.handlePicInfo} /><br />
-                <button className="button" type="submit" onClick={this.handlePicUpload}>UPLOAD</button><br />
-                <br />
-                <div className="profile-story">
-                    {this.state.showEditInfo ? <EditInfo toggleEditInfo={this.toggleEditInfo} updateStory={this.props.updateStory} userType={this.props.userType} /> : <FamilyStory story={this.props.story} toggleEditInfo={this.toggleEditInfo} userType={this.props.userType} />}
-                </div>
+                    <h1 className="inapp-h1">Your Family Profile</h1><br />
+                    <div className="profile-image">
+                        <img src={this.props.imageUrl || "/public/assets/blank-avatar.jpg"} />
+                    </div>
+                    <div className="profile-text">
+                        <h2>Share a Photo</h2>
+                        <input type="file" className="file-input" onChange={this.handlePicInfo} /><br />
+                        <br />
+                        <button className="button" type="submit" onClick={this.handlePicUpload}>&gt; UPLOAD</button><br />
+                    </div>
+                    <br />
+                    <br />
+                    <h2>Tell Your Story</h2>
+                    <div className="profile-story">
+                        {this.state.showEditInfo ? <EditInfo toggleEditInfo={this.toggleEditInfo} updateStory={this.props.updateStory} userType={this.props.userType} /> : <FamilyStory story={this.props.story} toggleEditInfo={this.toggleEditInfo} userType={this.props.userType} />}
+                    </div>
                 </div>
             )
         }

@@ -41,9 +41,9 @@ export class EditInfo extends React.Component {
     render() {
         return (
             <div id="edit-info-wrapper">
-                <textarea id="info-input" type="text" name="info" maxlength="250" onChange={this.handleEditInfo}></textarea><br />
-                <button className="button" type="submit" onClick={this.handleSaveInfo}>Save</button>
-                <button className="button" onClick={this.closeEditInfo}>Nevermind</button>
+                <textarea id="info-input" type="text" name="info" maxlength="250" onChange={this.handleEditInfo}></textarea><br /><br />
+                <button className="button" type="submit" onClick={this.handleSaveInfo}>&gt; Save</button>
+                <button className="button" onClick={this.closeEditInfo}>&gt; Nevermind</button>
             </div>
         )
     }

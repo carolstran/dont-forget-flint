@@ -40,7 +40,7 @@ export class Login extends React.Component {
                     <label for="password" class="input-labels">Password<br />
                         <input type="password" name="password" onChange={this.handleUserInfo} required /><br />
                     </label><br />
-                    <button type="button" className="button" onClick={this.loginUser}>LOGIN</button><br />
+                    <button type="button" className="button" onClick={this.loginUser}>&gt; LOGIN</button><br />
                 </div><br />
                 <p className="redirect-to">{'Not a member? Register '}<Link to="/register/">{'here'}</Link>.</p>
             </div>

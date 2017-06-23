@@ -24,7 +24,6 @@ var uploader = multer({
 router.route('/userProfile')
 
     .get(function(req, res) {
-        console.log(req.session.user.imageUrl);
         res.json({
             id: req.session.user.id,
             email: req.session.user.email,

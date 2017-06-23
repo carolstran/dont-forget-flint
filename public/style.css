@@ -8,7 +8,13 @@ body {
 }
 
 h1, h2, h3 {
-    font-family: 'Shadows Into Light', sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 300;
+}
+
+.inapp-h1 {
+    color: #C1F1FF;
+    margin-bottom: 5px;
 }
 
 h2 {
@@ -16,8 +22,8 @@ h2 {
 }
 
 p {
-    font-size: 14px;
-    font-family: 'Droid Sans', sans-serif;
+    font-size: 16px;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 em {
@@ -25,6 +31,10 @@ em {
 }
 
 a {
+    -moz-transition: color 0.1s ease-in-out;
+    -webkit-transition: color 0.1s ease-in-out;
+    -ms-transition: color 0.1s ease-in-out;
+    transition: color 0.1s ease-in-out;
     color: #EBC789;
     text-decoration: none;
 }
@@ -36,17 +46,19 @@ a:hover {
 
 .button {
     font-family: 'Shadows Into Light', sans-serif;
+    font-size: 18px;
     text-transform: uppercase;
-    color: #1D1D1D;
-    border: 0.5px solid #FFF9F9;
-    background-color: #FFF9F9;
-    padding: 5px 10px;
-    font-weight: bold;
-    margin-top: 20px;
+    background: none;
+    border: none;
+    color: #EBC789;
+}
+
+.button:hover {
+    color: #C1F1FF !important;
 }
 
 .error-message {
-    font-family: 'Droid Sans', sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
     font-style: italic;
     color: #F00;
     margin-bottom: 10px;
@@ -71,11 +83,11 @@ textarea:focus, input:focus {
 }
 
 label {
-    font-family: 'Droid Sans', sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
     color: #FFF9F9;
     position: relative;
     text-align: center;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 select {
@@ -83,22 +95,26 @@ select {
 }
 
 .styled-select {
-    font-family: 'Droid Sans', sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
     font-weight: bold;
     height: 20px;
     overflow: hidden;
     width: 140px;
-    background-color: #EBC789;
-    border: solid 1px #9D6C27;
-    color: #9D6C27;
+    background: none;
+    border: solid 1px #EBC789;
+    color: #FFF9F9;
 }
 
 select:focus {
-    background-color: #C1F1FF;
+    border: solid 1px #C1F1FF;
     outline: none !important;
 }
 
 /* WELCOME, REGISTER AND LOGIN */
+
+#welcome-wrapper {
+    margin: 0 0 100px 0;
+}
 
 #logo-large {
     height: 325px;
@@ -125,12 +141,20 @@ select:focus {
 }
 
 .welcome-text {
-    max-width: 650px;
+    max-width: 675px;
     text-align: center;
     margin: 0 auto;
 }
 
 /* FAMILY FORM */
+
+#family-form-wrapper {
+    margin: 25px 0 100px 0;
+}
+
+#family-form {
+    margin-top: 30px;
+}
 
 #family-form label, button {
     margin-left: 10px;
@@ -182,7 +206,134 @@ hr {
     margin-left: 50px;
 }
 
+/* TABLES */
+
+table {
+    font-family: 'Source Sans Pro', sans-serif;
+    color: #FFF9F9;
+    text-align: left;
+}
+
+td, th {
+    padding: 10px 30px 0 10px;
+}
+
+th {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: lighter;
+    font-size: 22px;
+    color: #EBC789;
+    padding-bottom: 5px;
+}
+
+#table-header {
+    border-bottom: 2px solid #EBC789;
+}
+
+#amount {
+    padding-left: 75px;
+}
+
+.how-often {
+    padding-left: 60px;
+}
+
+.table-family {
+    padding-left: 40px;
+}
+
+/* HOME COMPONENT - DONORS */
+
+.home-wrapper {
+    margin: 25px 0 100px 0;
+}
+
+.home-wrapper img {
+    max-height: 300px;
+    max-width: 300px;
+    border: 2px solid #EBC789;
+    display: inline-block;
+}
+
+.home-content {
+    margin-top: 30px;
+}
+
+ol, li {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 300;
+    font-size: 22px;
+}
+
+li {
+    padding: 5px;
+}
+
+.donations-wrapper {
+    margin-top: 25px;
+    width: 900px;
+}
+
+.donations-wrapper img {
+    border: 2px solid #EBC789;
+    max-width: 300px;
+    max-height: 300px;
+    display: inline-block;
+}
+
+.families-wrapper {
+    width: 900px;
+    display: inline-block;
+    margin: 50px 0 100px 0;
+}
+
+.families-wrapper h1 {
+    margin-bottom: 15px;
+}
+
+.single-family {
+    display: inline-block;
+    padding: 10px;
+}
+
+.single-donation {
+    display: inline-block;
+}
+
+.text-wrapper {
+    display: inline-block;
+    vertical-align: top;
+    float: right;
+    position: relative;
+}
+
+.donation-name {
+    margin-bottom: 0;
+}
+
+.donation-text p {
+    display: inline-block;
+    font-size: 16px;
+}
+
+.story-message {
+    max-width: 300px;
+    text-align: justify;
+}
+
 /* DONATE COMPONENT */
+
+.donate-page-wrapper {
+    margin: 25px 0 100px 0;
+}
+
+.donate-page-wrapper .error-message {
+    text-align: left;
+}
+
+#donation-form {
+    margin-top: 30px;
+}
 
 #donation-form select, textarea, label, button {
     margin-left: 10px;
@@ -206,6 +357,119 @@ hr {
     margin-left: 10px;
 }
 
-#donate-page-wrapper .error-message {
-    text-align: left;
+/* COMPLETED DONATION COMPONENT */
+
+#completed-donation-wrapper {
+    margin: 25px 0 100px 0;
+}
+
+#completed-donation-wrapper img {
+    max-height: 350px;
+    max-width: 350px;
+    border: 2px solid #FFF9F9;
+}
+
+#complete-donation-h2 {
+    margin-top: 0;
+    margin-left: 10px;
+}
+
+strong {
+    color: #EBC789;
+    font-weight: 400;
+}
+
+#family-match-wrapper {
+    margin-left: 10px;
+    text-align: center;
+    color: #1D1D1D;
+}
+
+#family-match-wrapper p {
+    max-width: 300px;
+    text-align: justify;
+    color: #1D1D1D;
+}
+
+#family-match-wrapper h1 {
+    font-weight: 400;
+    margin: 10px 0 10px 0;
+}
+
+#family-match-wrapper h2 {
+    margin-top: 0;
+    font-weight: 400;
+}
+
+#match-title-wrapper {
+    background-color: #EBC789;
+    border: 1px solid #FFF9F9;
+    margin-bottom: 7px;
+}
+
+#match-rest {
+    background-color: #EBC789;
+    border: 1px solid #FFF9F9;
+    padding: 15px 20px 20px 20px;
+}
+
+.family-match-image {
+    display: inline-block;
+}
+
+.family-match-text {
+    display: inline-block;
+    vertical-align: top;
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+/* PROFILE COMPONENT */
+
+#profile-page {
+    margin: 25px 0 100px 0;
+}
+
+#profile-page img {
+    max-height: 375px;
+    max-width: 375px;
+    border: 2px solid #EBC789;
+}
+
+.profile-image {
+    display: inline-block;
+}
+
+.profile-text {
+    display: inline-block;
+    vertical-align: top;
+    padding-left: 25px;
+    margin-top: 0;
+}
+
+.file-input {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.profile-story {
+    max-width: 650px;
+}
+
+.actual-story {
+    line-height: 150%;
+    text-align: justify;
+}
+
+.actual-location {
+    font-size: 18px;
+    margin-left: 15px;
+}
+
+.location-wrapper {
+    display: inline-block;
+}
+
+#edit-info-wrapper textarea {
+    height: 75px;
+    width: 500px;
 }

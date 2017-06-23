@@ -20,8 +20,6 @@ export class Donate extends React.Component {
         let donorMessage = this.state.donorMessage;
         let additionalNotes = this.state.additionalNotes;
 
-        console.log('Submit user info is running! Here is the info', donationAmount, donationFrequency, donorMessage, additionalNotes);
-
         if (!donationAmount || !donationFrequency) {
             this.setState({
                 notComplete: true
@@ -51,14 +49,11 @@ export class Donate extends React.Component {
     render() {
         return (
             <div className="donate-page-wrapper">
-                <h1>Place a donation here!</h1>
-                <p>Fill out your information and find out which family you've helped.</p>
-                <br />
-                <h2>Here's what we need from you:</h2>
+                <h1 className="inapp-h1">Make a Donation</h1>
                 {this.state.error && <div className="error-message">{'Something went wrong! Please try again.'}</div>}
                 {this.state.notComplete && <div className="error-message">{'You must fill out every field to continue.'}</div>}
                 <div id="donation-form">
-                    <label for="donationAmount" class="input-labels">Donation Amount<em>*</em><br />
+                    <label for="donationAmount" class="input-labels">Amount<em>*</em><br />
                         <p id="dollar-sign">$</p><input type="number" id="amount-input" name="donationAmount" onChange={this.handleUserInfo} required /><br />
                     </label><br />
                     <label for="donationFrequency" className="selector-wrapper">How Often<em>*</em><br />
@@ -74,7 +69,7 @@ export class Donate extends React.Component {
                     <label for="additionalNotes" class="input-labels">Any Notes for the Organizers<br />
                         <textarea type="text" name="additionalNotes" onChange={this.handleUserInfo} /><br />
                     </label><br />
-                    <button type="button" className="button" onClick={this.submitUserInfo}>DONATE</button>
+                    <button type="button" className="button" onClick={this.submitUserInfo}>&gt; Submit</button>
                 </div>
             </div>
         )

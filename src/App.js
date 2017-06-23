@@ -29,7 +29,6 @@ export class App extends React.Component {
         });
     }
     setImage(url) {
-        console.log(url);
         this.setState({
             imageUrl: url
         });
@@ -47,7 +46,6 @@ export class App extends React.Component {
         });
     }
     render() {
-        console.log(this.state.imageUrl);
         const { id, firstName, lastName, email, userType, imageUrl, location, familyName, story } = this.state;
         const children = React.cloneElement(this.props.children, { id, firstName, lastName, email, userType, setImage: this.setImage, imageUrl, updateLocation: this.updateLocation, location, familyName, updateStory: this.updateStory, story });
 
@@ -76,7 +74,7 @@ export class App extends React.Component {
                         <Logo />
                         <div id="nav-links">
                             <Link to="/">Home</Link><br />
-                            <Link to="/resources/">Resources</Link><br />
+                            <Link to="#">Resources</Link><br />
                             <Link to="/profile/">Profile</Link><br />
                             <Link onClick={this.handleLogout}>Logout</Link><br />
                         </div>

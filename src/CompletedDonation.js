@@ -15,17 +15,24 @@ export class CompletedDonation extends React.Component {
     }
     render() {
         return (
-            <div className="completed-donation-wrapper">
-                <h1>The donation is complete!</h1><br />
-                <h3>Here are the details</h3><br />
+            <div id="completed-donation-wrapper">
+                <h1 className="inapp-h1">Your Donation is Complete!</h1><br />
+                <h2 id="complete-donation-h2">We have you down for <strong>${this.state.donationAmount} {this.state.donationFrequency}</strong>.</h2>
                 <br />
-                <p>Donation Amount: ${this.state.donationAmount}</p><br />
-                <p>Frequency: {this.state.donationFrequency}</p><br />
-                <br />
-                <h3>Here's who you helped</h3>
-                <p>Family: {this.state.familyName}</p><br />
-                <img src={this.state.imageUrl || "/public/assets/blank-avatar.jpg"} /><br />
-                <p>Their story: {this.state.story}</p><br />
+                <div id="family-match-wrapper">
+                    <div id="match-title-wrapper">
+                        <h1>Meet the Flint Family Receiving Your Donation</h1>
+                    </div>
+                    <div id="match-rest">
+                        <div className="family-match-image">
+                            <img src={this.state.imageUrl || "/public/assets/blank-avatar.jpg"} />
+                        </div>
+                        <div className="family-match-text">
+                            <h2>{this.state.familyName}</h2>
+                            <p>{this.state.story}</p><br />
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }

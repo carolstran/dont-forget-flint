@@ -4,8 +4,8 @@ import {Profile} from './Profile';
 export function FamilyStory(props) {
     return (
         <div id="story-wrapper">
-            <p className="actual-story">{props.story}</p>
-            <button className="button" onClick={props.toggleEditInfo}>Edit Your Story</button>
+            <p className="actual-story">{props.story}</p><br />
+            <button className="button" onClick={props.toggleEditInfo}>&gt; Edit Your Story</button>
         </div>
     )
 }

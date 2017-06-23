@@ -9,7 +9,7 @@ export class Resources extends React.Component {
     render() {
         return (
             <div className="resources-wrapper">
-                <h1>Testing... is anyone out there?</h1>
+                <h1>Coming soon</h1>
             </div>
         )
     }

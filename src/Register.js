@@ -68,7 +68,7 @@ export class Register extends React.Component {
                                 <option value="recipient">Family</option>
                             </select>
                         </label><br />
-                        <button type="button" className="button" onClick={this.submitUserInfo}>SUBMIT</button>
+                        <button type="button" className="button" onClick={this.submitUserInfo}>&gt; SUBMIT</button>
                     </div><br />
                 <p className="redirect-to">{'If you already have an account, please '}<Link to="/login/">{'log in'}</Link>.</p>
             </div>
