@@ -74,7 +74,7 @@ export class App extends React.Component {
                         <Logo />
                         <div id="nav-links">
                             <Link to="/">Home</Link><br />
-                            <Link to="#">Resources</Link><br />
+                            <Link to="/resources/">Resources</Link><br />
                             <Link to="/profile/">Profile</Link><br />
                             <Link onClick={this.handleLogout}>Logout</Link><br />
                         </div>

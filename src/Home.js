@@ -163,7 +163,7 @@ export class Home extends React.Component {
                             <h2>Here's how to get started on Don't Forget Flint:</h2>
                             <ol className="home-list">
                                 <li>Update your <Link to="/profile/">profile</Link></li>
-                                <li>Check out our <Link to="#">resources</Link> page</li>
+                                <li>Check out our <Link to="/resources/">resources</Link> page to find support near you</li>
                                 <li>Once you receive a donation - you'll be notified on this page</li>
                             </ol>
                         </div>                    </div>

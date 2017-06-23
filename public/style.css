@@ -496,3 +496,9 @@ strong {
     height: 75px;
     width: 500px;
 }
+
+/* RESOURCES COMPONENT */
+
+.resources-wrapper p {
+    max-width: 800px;
+}
