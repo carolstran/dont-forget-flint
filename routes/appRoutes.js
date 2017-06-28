@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const db = require('../config/db');
+const toS3 = require('../config/toS3');
 const multer = require('multer');
 
 // MULTER MIDDLEWARE
@@ -44,17 +45,24 @@ router.route('/uploadDonorFile')
         let file = `/uploads/${req.file.filename}`;
 
         if (req.file) {
-            db.updateImageForDonor(req.session.user.id, file).then(function() {
-                req.session.user.imageUrl = file;
-                res.json({
-                    success: true,
-                    id: req.session.user.id,
-                    imageUrl: req.session.user.imageUrl
+            toS3(req.file).then(function() {
+                db.updateImageForDonor(req.session.user.id, file).then(function() {
+                    req.session.user.imageUrl = file;
+                    res.json({
+                        success: true,
+                        id: req.session.user.id,
+                        imageUrl: req.session.user.imageUrl
+                    });
+                }).catch(function(err) {
+                    console.log('Error uploading profile pic', err);
+                    res.json({
+                        sucess: false
+                    });
                 });
             }).catch(function(err) {
-                console.log('Error uploading profile pic', err);
+                console.log('Error uploading file to S3', err);
                 res.json({
-                    sucess: false
+                    success: false
                 });
             });
         } else {
@@ -70,17 +78,24 @@ router.route('/uploadFamilyFile')
         let file = `/uploads/${req.file.filename}`;
 
         if (req.file) {
-            db.updateImageForFamily(req.session.user.id, file).then(function() {
-                req.session.user.imageUrl = file;
-                res.json({
-                    success: true,
-                    id: req.session.user.id,
-                    imageUrl: req.session.user.imageUrl
+            toS3(req.file).then(function() {
+                db.updateImageForFamily(req.session.user.id, file).then(function() {
+                    req.session.user.imageUrl = file;
+                    res.json({
+                        success: true,
+                        id: req.session.user.id,
+                        imageUrl: req.session.user.imageUrl
+                    });
+                }).catch(function(err) {
+                    console.log('Error uploading profile pic', err);
+                    res.json({
+                        sucess: false
+                    });
                 });
             }).catch(function(err) {
-                console.log('Error uploading profile pic', err);
+                console.log('Error uploading file to S3', err);
                 res.json({
-                    sucess: false
+                    success: false
                 });
             });
         } else {

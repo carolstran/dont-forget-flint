@@ -110,12 +110,18 @@ function updateImageForDonor(id, file) {
 
             return db.query(q, params)
             .then(function(result) {
+                result.rows.forEach(row => {
+                    row.image_url = 'https://s3.amazonaws.com/dontforgetflint/' + row.image_url;
+                });
                 return result;
             }).catch(function(err) {
                 console.log('Error inserting donor in DB', err);
                 throw err;
             });
         } else {
+            result.rows.forEach(row => {
+                row.image_url = 'https://s3.amazonaws.com/dontforgetflint/' + row.image_url;
+            });
             return result;
         }
     }).catch(function(err) {
@@ -143,12 +149,18 @@ function updateImageForFamily(id, file) {
 
             return db.query(q, params)
             .then(function(result) {
+                result.rows.forEach(row => {
+                    row.image_url = 'https://s3.amazonaws.com/dontforgetflint/' + row.image_url;
+                });
                 return result;
             }).catch(function(err) {
                 console.log('Error inserting recipient in DB', err);
                 throw err;
             });
         } else {
+            result.rows.forEach(row => {
+                row.image_url = 'https://s3.amazonaws.com/dontforgetflint/' + row.image_url;
+            });
             return result;
         }
     }).catch(function(err) {
