@@ -45,7 +45,7 @@ router.route('/uploadDonorFile')
         let file = `/uploads/${req.file.filename}`;
 
         if (req.file) {
-            toS3(req.file).then(function() {
+            toS3.makeS3Request(req, res, function(result) {
                 db.updateImageForDonor(req.session.user.id, file).then(function() {
                     req.session.user.imageUrl = file;
                     res.json({
@@ -58,11 +58,6 @@ router.route('/uploadDonorFile')
                     res.json({
                         sucess: false
                     });
-                });
-            }).catch(function(err) {
-                console.log('Error uploading file to S3', err);
-                res.json({
-                    success: false
                 });
             });
         } else {
@@ -78,7 +73,7 @@ router.route('/uploadFamilyFile')
         let file = `/uploads/${req.file.filename}`;
 
         if (req.file) {
-            toS3(req.file).then(function() {
+            toS3.makeS3Request(req, res, function() {
                 db.updateImageForFamily(req.session.user.id, file).then(function() {
                     req.session.user.imageUrl = file;
                     res.json({
@@ -91,11 +86,6 @@ router.route('/uploadFamilyFile')
                     res.json({
                         sucess: false
                     });
-                });
-            }).catch(function(err) {
-                console.log('Error uploading file to S3', err);
-                res.json({
-                    success: false
                 });
             });
         } else {
