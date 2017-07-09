@@ -17,7 +17,7 @@ export class CompletedDonation extends React.Component {
         return (
             <div id="completed-donation-wrapper">
                 <h1 className="inapp-h1">Your Donation is Complete!</h1><br />
-                <h2 id="complete-donation-h2">We have you down for <strong>${this.state.donationAmount} {this.state.donationFrequency}</strong>.</h2>
+                <h2 id="complete-donation-h2">We have you down for <strong>${this.state.donationAmount} {this.state.donationFrequency}</strong>. You will be receiving an email soon regarding payment.</h2>
                 <br />
                 <div id="family-match-wrapper">
                     <div id="match-title-wrapper">
