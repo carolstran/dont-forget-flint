@@ -66,6 +66,10 @@ function checkAccount(email, password) {
                     throw new Error('Boogus credentials');
                 }
 
+                result.rows.forEach(row => {
+                    row.image_url = 'https://s3.amazonaws.com/dontforgetflint/' + row.image_url;
+                });
+
                 let newObj = {
                     passwordMatch: passwordMatch,
                     userId: result.rows[0].id,
@@ -297,6 +301,9 @@ function getLatestDonation(donorId) {
 
     return db.query(q, params)
     .then(function(results) {
+        results.rows.forEach(row => {
+            row.image_url = 'https://s3.amazonaws.com/dontforgetflint/' + row.image_url;
+        });
         return results.rows[0];
     }).catch(function(err) {
         console.log('Error getLatestDonation in DB', err);
@@ -316,6 +323,9 @@ function getAllDonationAndDonorInfo(recipientId) {
 
     return db.query(q, params)
     .then(function(results) {
+        results.rows.forEach(row => {
+            row.image_url = 'https://s3.amazonaws.com/dontforgetflint/' + row.image_url;
+        });
         return results.rows;
     }).catch(function(err) {
         console.log('Error getAllDonationAndDonorInfo in DB', err);
@@ -334,6 +344,9 @@ function getAllDonationsForUser(donorId) {
 
     return db.query(q, params)
     .then(function(results) {
+        results.rows.forEach(row => {
+            row.image_url = 'https://s3.amazonaws.com/dontforgetflint/' + row.image_url;
+        });
         return results.rows;
     }).catch(function(err) {
         console.log('Error getAllDonationsForUser in DB', err);

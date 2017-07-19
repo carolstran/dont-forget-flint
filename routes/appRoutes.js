@@ -42,12 +42,12 @@ router.route('/userProfile')
 router.route('/uploadDonorFile')
 
     .post(uploader.single('file'), function(req, res) {
-        let file = `/uploads/${req.file.filename}`;
+        let file = `${req.file.filename}`;
 
         if (req.file) {
             toS3.makeS3Request(req, res, function(result) {
                 db.updateImageForDonor(req.session.user.id, file).then(function() {
-                    req.session.user.imageUrl = file;
+                    req.session.user.imageUrl = 'https://s3.amazonaws.com/dontforgetflint/' + file;
                     res.json({
                         success: true,
                         id: req.session.user.id,
@@ -70,12 +70,12 @@ router.route('/uploadDonorFile')
 router.route('/uploadFamilyFile')
 
     .post(uploader.single('file'), function(req, res) {
-        let file = `/uploads/${req.file.filename}`;
+        let file = `${req.file.filename}`;
 
         if (req.file) {
             toS3.makeS3Request(req, res, function() {
                 db.updateImageForFamily(req.session.user.id, file).then(function() {
-                    req.session.user.imageUrl = file;
+                    req.session.user.imageUrl = 'https://s3.amazonaws.com/dontforgetflint/' + file;
                     res.json({
                         success: true,
                         id: req.session.user.id,
