@@ -5,4 +5,4 @@ Users can register as either a donor or a family. When a donation is submitted, 
 
 Technologies: React.js, Node.js, Express.js and PostgreSQL.
 
-Hosted on Heroku. See it live [here](https://dont-forget-flint.herokuapp.com/).
+Hosted on [Heroku](https://dont-forget-flint.herokuapp.com/).
