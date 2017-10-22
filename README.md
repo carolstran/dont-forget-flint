@@ -11,9 +11,9 @@ This web app was built on June 19-23, 2017 as a final project for [SPICED Academ
 ## How Don't Forget Flint Works
 The goal is to personalize the donation process while avoiding prejudice. To accomplish this, here's what happens:
 
-1. Users can register as either a donor or a family.
-2. When a donation is submitted, a database query is triggered to gather a list of potential recipients and insert one into the donation at random.
-3. The match is then revealed to both sides.
+- Users can register as either a donor or a family.
+- When a donation is submitted, a database query is triggered to gather a list of potential recipients and insert one into the donation at random.
+- The match is then revealed to both sides.
 
 ## Other Key Aspects
 - Utilizes Amazon's S3 for image hosting
